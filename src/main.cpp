@@ -1,18 +1,15 @@
 
+#include "./binarytree/binarytree.h"
+#include "./database/database.h"
+#include "./hashtable/hashtable.h"
 #include <cstdlib>
 #include <iostream>
 #include <string>
-#include "./hashtable/hashtable.h"
-#include "./binarytree/binarytree.h"
-#include "./database/database.h"
-// #include "hashtable.h"
-// #include "BinaryTree.h"
-// #include "Database.h"
 
-using namespace std;
-using namespace HashT_std;
 using namespace BT_std;
 using namespace Database_std;
+using namespace HashT_std;
+using namespace std;
 
 int main(int argc, char** argv)
 {

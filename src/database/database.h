@@ -1,12 +1,12 @@
 #pragma once
+#include "../binarytree/binarytree.h"
+#include "../hashtable/hashtable.h"
 #include <cstdlib>
 #include <iostream>
 #include <string>
-#include "../hashtable/hashtable.h"
-#include "../binarytree/binarytree.h"
 
-using namespace HashT_std;
 using namespace BT_std;
+using namespace HashT_std;
 using namespace std;
 
 #ifndef DATABASE_H

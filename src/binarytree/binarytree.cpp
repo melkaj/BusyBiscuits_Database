@@ -1,11 +1,11 @@
 
+#include "binarytree.h"
 #include <cstdlib>
 #include <iostream>
 #include <string>
-#include "binarytree.h"
 
-using namespace std;
 using namespace BT_std;
+using namespace std;
 
 BTree::BTree()
 // Makes root point to nothing

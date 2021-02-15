@@ -1,11 +1,11 @@
 
+#include "hashtable.h"
 #include <cstdlib>
 #include <iostream>
 #include <string>
-#include "hashtable.h"
 
-using namespace std;
 using namespace HashT_std;
+using namespace std;
 
 HashT::HashT()
 // Makes each 'bucket' in our HashTable a new 'item'
