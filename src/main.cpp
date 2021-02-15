@@ -4,7 +4,7 @@
 #include <string>
 #include "./hashtable/hashtable.h"
 #include "./binarytree/binarytree.h"
-#include "./database/database.cpp"
+#include "./database/database.h"
 // #include "hashtable.h"
 // #include "BinaryTree.h"
 // #include "Database.h"

@@ -3,8 +3,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "../hashtable/hashtable.h"
-#include "../binarytree/binarytree.h"
+// #include "../hashtable/hashtable.h"
+// #include "../binarytree/binarytree.h"
 #include "database.h"
 
 using namespace Database_std;
@@ -19,7 +19,7 @@ Database::Database()
 
 Database::~Database()
 {
-
+	cout << "Goodbye from deconstructor, object is being destroyed..." << endl;
 }
 
 void Database::ReadInData()
