@@ -16,20 +16,20 @@ using namespace Database_std;
 
 int main(int argc, char** argv)
 {
-	int ss[16] = { 100001, 100002, 100003, 100004,
-		100005, 100006, 100007 };
+	// int ss[16] = { 100001, 100002, 100003, 100004,
+	// 	100005, 100006, 100007 };
 
-	int temp = 100001;
+	// int temp = 100001;
 
-	string names[16] = { "Meldin", "Adila", "Seio" , "Dad",
-		"Mom", "Brother", "Sister", "Cousin", "Sam", "Mike",
-		"Veronica", "Jon", "Jannise", "Liz", "Isabella",
-		"Victor" };
+	// string names[16] = { "Meldin", "Adila", "Seio" , "Dad",
+	// 	"Mom", "Brother", "Sister", "Cousin", "Sam", "Mike",
+	// 	"Veronica", "Jon", "Jannise", "Liz", "Isabella",
+	// 	"Victor" };
 
-	string jobs[16] = { "developer", "marketing", "IT" , "Retired",
-		"Cleaning", "Bank", "Drinker", "Waiter", "LS Sales", "TV Sales",
-		"Paper Sales", "Fighter", "Secretary", "Driver", "Racer",
-		"Intern" };
+	// string jobs[16] = { "developer", "marketing", "IT" , "Retired",
+	// 	"Cleaning", "Bank", "Drinker", "Waiter", "LS Sales", "TV Sales",
+	// 	"Paper Sales", "Fighter", "Secretary", "Driver", "Racer",
+	// 	"Intern" };
 
 	/*BTree objt;
 	objt.PrintInOrder();

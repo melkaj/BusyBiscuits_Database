@@ -1,7 +1,18 @@
+# Minimum CMake version allowed. This is the version on this environment
 cmake_minimum_required(VERSION 3.16.3)
 
+# Project name
 project(BusyBiscuits_Database)
 
-set(CMAKE_CXX_STANDARD 14)
+# Creating the flags variable to be all these flags
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -std=c++14")
 
-add_executable(main ./src/main.cpp ./src/database/database.cpp)
+# Recursively searches through paths to find all .cpp files
+file(GLOB_RECURSE source_files "src/*.cpp")
+
+# Printing message to the console
+message (${source_files})
+
+# Compiling the files in the 'source_files' variable and naming the 
+#   executable 'main'
+add_executable(main ${source_files})
