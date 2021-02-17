@@ -1,49 +1,61 @@
 #pragma once
+#include "../binarytree/binarytree.h"
 #include <string>
-// #include <cstdlib>
-// #include <iostream>
 
 using namespace std;
 
 #ifndef DATASTRUCTURE_H
 #define DATASTRUCTURE_H
 
-namespace Datastructure_std
+namespace datastructure_std
 {
     class Datastructure
     {
     private:
         static const int tableSize = 10;
 
-        struct elem
+        // Person structure
+        struct node
         {
             int socialSecurity;
             string name;
             string occupation;
-            elem* next;
+            node* left;
+            node* right;
         };
 
-        // Array that hold pointers to elems
-        elem* HashTable[tableSize];
+        // Array of node pointers. Each node creates a binary tree
+        node* HashTable[tableSize];
+
+        // Used to traverse the tree if the main index is filled up
+        void AddElemToTree(int socialSecurity, string name, string occupation, Datastructure::node* root);
+
+        // Deletes a subtree recursively 
+        void DeleteSubTree(Datastructure::node* ptr);
+
+        void PrintDatabaseInOrder_P(Datastructure::node* ptr);
 
     public:  
-        // Constructor
+        // Intializes hashtable with empty entries
         Datastructure();
 
-        // Deconstructor
+        // TODO: ONCE DATASTRUCTURE IS FINISHED, CLEANUP PROPERLY    
         ~Datastructure();
 
         // Hash function
         int Hash(int key);
 
+        // Creates new node 
+        node* CreateLeaf(int socialSecurity, string name, string occupation);
+
         // Add item to the data structure
-        void AddItem(int socialSecurity, string name, string occupation);
+        void AddElem(int socialSecurity, string name, string occupation);
 
         //
         int NumberOfItemsInBucket(int index);
 
         //
-        void PrintTable();
+        void PrintDatabaseInOrder();
 
         //
         void PrintItemsInBucket(int index);

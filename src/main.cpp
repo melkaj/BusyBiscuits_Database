@@ -1,6 +1,7 @@
 
 #include "./binarytree/binarytree.h"
 #include "./database/database.h"
+#include "./datastructure/datastructure.h"
 #include "./hashtable/hashtable.h"
 #include <cstdlib>
 #include <iostream>
@@ -8,25 +9,61 @@
 
 using namespace BT_std;
 using namespace Database_std;
+using namespace datastructure_std;
 using namespace HashT_std;
 using namespace std;
 
 int main(int argc, char** argv)
 {
+
+
+
+	// DATA TO BE USED IN TESTING
 	// int ss[16] = { 100001, 100002, 100003, 100004,
 	// 	100005, 100006, 100007 };
 
 	// int temp = 100001;
 
-	// string names[16] = { "Meldin", "Adila", "Seio" , "Dad",
-	// 	"Mom", "Brother", "Sister", "Cousin", "Sam", "Mike",
-	// 	"Veronica", "Jon", "Jannise", "Liz", "Isabella",
-	// 	"Victor" };
+	int sos = 120000;
 
-	// string jobs[16] = { "developer", "marketing", "IT" , "Retired",
-	// 	"Cleaning", "Bank", "Drinker", "Waiter", "LS Sales", "TV Sales",
-	// 	"Paper Sales", "Fighter", "Secretary", "Driver", "Racer",
-	// 	"Intern" };
+	string names[16] = { "Meldin", "Adila", "Seio" , "Dad",
+		"Mom", "Brother", "Sister", "Cousin", "Sam", "Mike",
+		"Veronica", "Jon", "Jannise", "Liz", "Isabella",
+		"Victor" };
+
+	string jobs[16] = { "developer", "Marketing", "IT" , "Retired",
+		"Cleaning", "Bank", "Consultant", "Waiter", "LS Sales", "TV Sales",
+		"Paper Sales", "Fighter", "Secretary", "Driver", "Racer",
+		"Intern" };
+
+
+
+
+
+	// TESTING NEW DATASTRUCTURE ADDELEMENT
+	Datastructure dt;
+
+	// Adding the elements
+	for (int i = 0; i < 16; i++)
+	{
+		cout << i << endl;
+		dt.AddElem(sos+i, names[i], jobs[i]);
+	}
+
+	// Printing the elements
+	dt.PrintDatabaseInOrder();
+
+	dt.AddElem(120000, "Meldinpt2", "Software Engineer (Hopefully)");
+	dt.PrintDatabaseInOrder();
+
+
+
+
+
+
+
+
+
 
 	/*BTree objt;
 	objt.PrintInOrder();
@@ -97,9 +134,9 @@ int main(int argc, char** argv)
 	obj.PrintTable();*/
 
 
-	Database open;
-	open.WriteData();
-	open.ReadInData();
+	// Database open;
+	// open.WriteData();
+	// open.ReadInData();
 
 	return 0;
 }
