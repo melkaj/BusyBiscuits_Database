@@ -35,6 +35,14 @@ namespace datastructure_std
 
         void PrintDatabaseInOrder_P(Datastructure::node* ptr);
 
+        void RemoveNode_P(int socialSecurity, Datastructure::node* parent);
+
+        void RemoveMatch(Datastructure::node* parent, Datastructure::node* match, bool left);
+
+        void RemoveRootMatch(Datastructure::node* &root);
+
+        Datastructure::node* FindSmallestNodePrivate(Datastructure::node* ptr);
+
     public:  
         // Intializes hashtable with empty entries
         Datastructure();
@@ -64,7 +72,7 @@ namespace datastructure_std
         void GetOccupation(int socialSecurity);
 
         //
-        void RemoveItem(int socialSecurity);
+        void RemoveNode(int socialSecurity);
     };
 }
 

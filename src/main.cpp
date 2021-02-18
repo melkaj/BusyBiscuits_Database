@@ -13,10 +13,36 @@ using namespace datastructure_std;
 using namespace HashT_std;
 using namespace std;
 
+// Person structure
+struct temp
+{
+	int num;
+	temp* next;
+}; 
+
 int main(int argc, char** argv)
 {
-
-
+	// temp* arr[5];
+	// for (int i = 0; i < 5; i++)
+	// {
+	// 	arr[i] = new temp;
+	// 	arr[i]->num = i;
+	// 	arr[i]->next = NULL;
+	// }
+	// for (int i = 0; i < 5; i++)
+	// {
+	// 	cout << arr[i]->num << endl;
+	// }
+	// for (int i = 0; i < 5; i++)
+	// {
+	// 	cout << "Deleting: " << arr[i]->num << endl;
+	// 	temp* delptr = arr[i];
+	// 	arr[i] = new temp;
+	// 	arr[i]->num = i+10;
+	// 	arr[i]->next = NULL; 
+	// 	delete delptr;
+	// }
+	// cout << "Hkjhrfidgfvibhvkjfnd" << endl;
 
 	// DATA TO BE USED IN TESTING
 	// int ss[16] = { 100001, 100002, 100003, 100004,
@@ -42,22 +68,23 @@ int main(int argc, char** argv)
 
 	// TESTING NEW DATASTRUCTURE ADDELEMENT
 	Datastructure dt;
+	// dt.PrintDatabaseInOrder();
 
 	// Adding the elements
 	for (int i = 0; i < 16; i++)
 	{
 		cout << i << endl;
 		dt.AddElem(sos+i, names[i], jobs[i]);
+		dt.AddElem(sos+i, names[i], jobs[i]);
 	}
 
 	// Printing the elements
 	dt.PrintDatabaseInOrder();
 
-	dt.AddElem(120000, "Meldinpt2", "Software Engineer (Hopefully)");
+	dt.RemoveNode(120001);
+
+	// Printing the elements
 	dt.PrintDatabaseInOrder();
-
-
-
 
 
 
