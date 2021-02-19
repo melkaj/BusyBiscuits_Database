@@ -1,5 +1,6 @@
 ## Building the Project ##
  - Using CMake for builds. Create a builds folder at the root so that the file structure looks like the following:
+ ```text
 BusyBiscuits_Database
     +---src
     +---build
@@ -10,6 +11,7 @@ BusyBiscuits_Database
     +---build.sh
     +---buildandrun.sh
     +---LICENSE
+```
  - To build the project through the terminal, stay in the root of the project and execute the build shell script as follows:
     **./build.sh**
     Then execute the run script:
