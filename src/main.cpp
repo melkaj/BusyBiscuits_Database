@@ -81,7 +81,7 @@ int main(int argc, char** argv)
 	// Printing the elements
 	dt.PrintDatabaseInOrder();
 
-	dt.RemoveNode(120001);
+	// dt.RemoveNode(120001);
 
 	// Printing the elements
 	dt.PrintDatabaseInOrder();

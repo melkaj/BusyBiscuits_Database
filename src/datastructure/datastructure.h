@@ -31,7 +31,7 @@ namespace datastructure_std
         void AddElemToTree(int socialSecurity, string name, string occupation, Datastructure::node* root);
 
         // Deletes a subtree recursively 
-        void DeleteSubTree(Datastructure::node* ptr);
+        int DeleteSubTree(Datastructure::node* ptr);
 
         void PrintDatabaseInOrder_P(Datastructure::node* ptr);
 

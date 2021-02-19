@@ -15,21 +15,26 @@ Datastructure::Datastructure()
 
 Datastructure::~Datastructure()
 {
+    int count = 0;
     for (int i = 0; i < tableSize; i++)
     {
-        DeleteSubTree(HashTable[i]);
+        count += DeleteSubTree(HashTable[i]);
     }
+    cout << "Deleted " << count << " node(s)..." << endl;
 }
 
-void Datastructure::DeleteSubTree(Datastructure::node* ptr)
+int Datastructure::DeleteSubTree(Datastructure::node* ptr)
 {
+    int count = 0;
     if (ptr != NULL)
     {
-        if (ptr->left != NULL)   DeleteSubTree(ptr->left);
-        if (ptr->right != NULL)  DeleteSubTree(ptr->right);
+        if (ptr->left != NULL)   count += DeleteSubTree(ptr->left);
+        if (ptr->right != NULL)  count += DeleteSubTree(ptr->right);
         cout << "From deconstructor helper function - Deleting node: " << ptr->name << endl;
         delete ptr;
+        count += 1;
     }
+    return count;
 }
 
 int Datastructure::Hash(int key)
