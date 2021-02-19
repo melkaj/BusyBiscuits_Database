@@ -1,10 +1,19 @@
-## Building ##
-1. Using CMake for builds. Create a builds folder at the root
-2. CD into the new builds folder and enter the following command:
-    **cmake ..**
-3. This should generate the Make files needed. Enter the following command:
-    **make**
+## Building the Project ##
+ - Using CMake for builds. Create a builds folder at the root so that the file structure looks like the following:
+BusyBiscuits_Database
+    +---src
+    +---build
+    +---.gitignore
+    +---CMkakesList.txt
+    +---readme.md
+    +---run.sh
+    +---build.sh
+    +---buildandrun.sh
+    +---LICENSE
+ - To build the project through the terminal, stay in the root of the project and execute the build shell script as follows:
+    **./build.sh**
+    Then execute the run script:
+    **./run.sh**
+    And that should run the executable in the terminal. Another script was created to do the build and run script together. Execute the build and run script:
+    **./buildandrun.sh**
     to compile all the necessery files and created the executable
-4. Then the executable file should have been created. Enter:
-    **./main**
-    to run the exectuable and it should have ran fine.

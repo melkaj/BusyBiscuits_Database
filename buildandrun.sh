@@ -1,4 +1,7 @@
 #!/bin/sh
 
-./build.sh
-./run.sh
+cd build
+cmake ..
+make
+
+./main
