@@ -74,8 +74,8 @@ int main(int argc, char** argv)
 	for (int i = 0; i < 16; i++)
 	{
 		cout << i << endl;
-		dt.AddElem(sos+i, names[i], jobs[i]);
-		dt.AddElem(sos+i, names[i], jobs[i]);
+		dt.AddEntry(sos+i, names[i], jobs[i]);
+		dt.AddEntry(sos+i, names[i], jobs[i]);
 	}
 
 	// Printing the elements

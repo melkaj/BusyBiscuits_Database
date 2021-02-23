@@ -11,6 +11,7 @@ TEST_CASE("Initializing tests...")
 
 TEST_CASE("Testing the Datastructure class...")
 {
+    // SETUP
     int sos = 120000;
 
 	string nums[16] = { "1", "2", "3" , "4",
@@ -23,8 +24,8 @@ TEST_CASE("Testing the Datastructure class...")
     // Adding the elements
 	for (int i = 0; i < 16; i++)
 	{
-        if (i == 1)		ds.AddElem(121000, nums[i], nums[i]);
-        else            ds.AddElem(sos+i, nums[i], nums[i]);
+        if (i == 1)		ds.AddEntry(121000, nums[i], nums[i]);
+        else            ds.AddEntry(sos+i, nums[i], nums[i]);
 	}
 
     // ds.PrintDatabaseInOrder();
@@ -37,48 +38,49 @@ TEST_CASE("Testing the Datastructure class...")
         REQUIRE(ds.GetOccupation(120023) == "Empty");
     }
 
-    SECTION("TESTING RemoveNode methods...")
+    SECTION("TESTING RemoveEntry methods...")
     {
         SECTION("Removing root node (but with only one child)...")
         {
             REQUIRE(ds.GetOccupation(120000) == "1");
-            ds.RemoveNode(120000);
+            ds.RemoveEntry(120000);
             REQUIRE(ds.GetOccupation(120000) == "Empty");
         }
 
         SECTION("Removing root node (but with two children)...")
         {
-            ds.AddElem(119996, "-1", "-1");
+            // Adding a child to the left of the root
+            ds.AddEntry(119996, "-1", "-1");
             REQUIRE(ds.GetOccupation(119996) == "-1");
-            ds.RemoveNode(120000);
+            ds.RemoveEntry(120000);
             REQUIRE(ds.GetOccupation(120000) == "Empty");
         }
         
         SECTION("Removing leaf node...")
         {
             REQUIRE(ds.GetOccupation(120015) == "16");
-            ds.RemoveNode(120015);
+            ds.RemoveEntry(120015);
             REQUIRE(ds.GetOccupation(120015) == "Empty");
         }
 
         SECTION("Removing parent node (node with one left child)...")
         {
             REQUIRE(ds.GetOccupation(121000) == "2");
-            ds.RemoveNode(121000);
+            ds.RemoveEntry(121000);
             REQUIRE(ds.GetOccupation(121000) == "Empty");
         }
 
         SECTION("Removing parent node (node with one right child)...")
         {
             REQUIRE(ds.GetOccupation(120004) == "5");
-            ds.RemoveNode(120004);
+            ds.RemoveEntry(120004);
             REQUIRE(ds.GetOccupation(120004) == "Empty");
         }
 
         SECTION("Removing node that does not exist...")
         {
             REQUIRE(ds.GetOccupation(100000) == "Empty");
-            ds.RemoveNode(100000);
+            ds.RemoveEntry(100000);
             REQUIRE(ds.GetOccupation(100000) == "Empty");
         }
     }
@@ -86,24 +88,18 @@ TEST_CASE("Testing the Datastructure class...")
     SECTION("Overwriting entries...")
     {
         REQUIRE(ds.GetOccupation(120000) == "1");
-        ds.AddElem(120000, "Meldin", "Engineer");
+        ds.AddEntry(120000, "Meldin", "Engineer");
         REQUIRE(ds.GetOccupation(120000) == "Engineer");
-        ds.RemoveNode(120000);
+        ds.RemoveEntry(120000);
         REQUIRE(ds.GetOccupation(120000) == "Empty");
     }
 
-    SECTION("Overwriting entries...")
+    SECTION("Overwriting entries PT2...")
     {
-        REQUIRE(ds.GetOccupation(120000) == "1");
-        ds.AddElem(120000, "Meldin", "Engineer");
-        REQUIRE(ds.GetOccupation(120000) == "Engineer");
-        ds.RemoveNode(120000);
-        REQUIRE(ds.GetOccupation(120000) == "Empty");
+        REQUIRE(ds.GetOccupation(120012) == "13");
+        ds.RemoveEntry(120012);
+        REQUIRE(ds.GetOccupation(120012) == "Empty");
+        ds.AddEntry(120012, "NewName", "NewOccupation");
+        REQUIRE(ds.GetOccupation(120012) == "NewOccupation");
     }
 }
-
-
-
-
-
-

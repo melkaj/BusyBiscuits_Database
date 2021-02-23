@@ -21,6 +21,7 @@ Datastructure::~Datastructure()
         count += DeleteSubTree(HashTable[i]);
     }
     cout << "Deleted " << count << " node(s)..." << endl;
+    cout << "======================================================================" << endl;
 }
 
 int Datastructure::DeleteSubTree(Datastructure::node* ptr)
@@ -54,17 +55,17 @@ Datastructure::node* Datastructure::CreateLeaf(int socialSecurity, string name, 
     return newLeaf;
 }
 
-void Datastructure::AddElemToTree(int socialSecurity, string name, string occupation, Datastructure::node* root)
+void Datastructure::AddEntryToTree(int socialSecurity, string name, string occupation, Datastructure::node* root)
 {  
     if (socialSecurity < root->socialSecurity)       // Less than
     {
         if (root->left == NULL)   root->left = CreateLeaf(socialSecurity, name, occupation); 
-        else                      AddElemToTree(socialSecurity, name, occupation, root->left);
+        else                      AddEntryToTree(socialSecurity, name, occupation, root->left);
     }
     else if (socialSecurity > root->socialSecurity)  // Greater than
     {
         if (root->right == NULL)  root->right = CreateLeaf(socialSecurity, name, occupation); 
-        else                      AddElemToTree(socialSecurity, name, occupation, root->right);
+        else                      AddEntryToTree(socialSecurity, name, occupation, root->right);
     }
     else                                             // Equal so overwrite
     {
@@ -74,7 +75,7 @@ void Datastructure::AddElemToTree(int socialSecurity, string name, string occupa
     }
 }
 
-void Datastructure::AddElem(int socialSecurity, string name, string occupation)
+void Datastructure::AddEntry(int socialSecurity, string name, string occupation)
 {
     int index = Hash(socialSecurity);
 
@@ -88,7 +89,7 @@ void Datastructure::AddElem(int socialSecurity, string name, string occupation)
     // Index in hashtable is not empty
     else
     {
-        AddElemToTree(socialSecurity, name, occupation, HashTable[index]);
+        AddEntryToTree(socialSecurity, name, occupation, HashTable[index]);
     }
 }
 
@@ -105,16 +106,23 @@ void Datastructure::PrintDatabaseInOrder()
 void Datastructure::PrintDatabaseInOrder_P(node* ptr)
 {
     if (ptr->left != NULL)  PrintDatabaseInOrder_P(ptr->left);
-    cout << "\tName: " << ptr->name << "(" << &ptr << ")" << endl;
+    cout << "\tName: " << ptr->name << endl;
     cout << "\tSS: " << ptr->socialSecurity << endl;
     cout << "\tOccupation: " << ptr->occupation << endl;
-    cout << "\tleft: " << ptr->left;
-    cout << "\tright: " << ptr->right << endl;
+    
+    // Left node
+    if (ptr->left != NULL)  cout << "\tleft: " << ptr->left->socialSecurity;
+    else                    cout << "\tleft: " << ptr->left;
+
+    // Right node
+    if (ptr->right != NULL)  cout << "\tright: " << ptr->right->socialSecurity << endl;
+    else                    cout << "\tright: " << ptr->right << endl;
+
     cout << "\t______________________________________________________________" << endl;
     if (ptr->right != NULL) PrintDatabaseInOrder_P(ptr->right);
 }
 
-void Datastructure::RemoveNode(int socialSecurity)
+void Datastructure::RemoveEntry(int socialSecurity)
 {
     int index = Hash(socialSecurity);
 
@@ -125,14 +133,11 @@ void Datastructure::RemoveNode(int socialSecurity)
     }
     else   
     {
-        RemoveNode_P(socialSecurity, HashTable[index]);
+        RemoveEntry_P(socialSecurity, HashTable[index]);
     }
-    cout << "In RemoveNode: " << HashTable[index]->socialSecurity
-        << HashTable[index]->name
-        << HashTable[index]->occupation << endl;
 }
 
-void Datastructure::RemoveNode_P(int socialSecurity, node* parent)
+void Datastructure::RemoveEntry_P(int socialSecurity, node* parent)
 {
     // socialSecurity is less than parent socialSecurity, 
     // and its looking at something to the left
@@ -140,7 +145,7 @@ void Datastructure::RemoveNode_P(int socialSecurity, node* parent)
     {
         parent->left->socialSecurity == socialSecurity ?
             RemoveMatch(parent, parent->left, true) :
-            RemoveNode_P(socialSecurity, parent->left);
+            RemoveEntry_P(socialSecurity, parent->left);
     }
     // socialSecurity is greater than parent socialSecurity, 
     // and its looking at something to the right
@@ -148,7 +153,7 @@ void Datastructure::RemoveNode_P(int socialSecurity, node* parent)
     {
         parent->right->socialSecurity == socialSecurity ?
             RemoveMatch(parent, parent->right, false) :
-            RemoveNode_P(socialSecurity, parent->right);
+            RemoveEntry_P(socialSecurity, parent->right);
     }
     // No match in database
     else
@@ -161,7 +166,6 @@ void Datastructure::RemoveMatch(Datastructure::node* parent, Datastructure::node
 {
     node* delptr;
     int matchSocial = match->socialSecurity;
-    //int smallestInRightSubtree;
     node* smallestNodeInRightSubtree;
 
     // ZERO children
@@ -172,7 +176,7 @@ void Datastructure::RemoveMatch(Datastructure::node* parent, Datastructure::node
             parent->left = NULL : 
             parent->right = NULL;
         delete delptr;
-        cout << " Node with Social Security " << matchSocial
+        cout << "Node with Social Security " << matchSocial
             << " was removed\n";
     }
     // ONE child (has RIGHT child)
@@ -186,7 +190,7 @@ void Datastructure::RemoveMatch(Datastructure::node* parent, Datastructure::node
         match->right = NULL;
         delptr = match;
         delete delptr;
-        cout << " Node with Social Security " << matchSocial
+        cout << "Node with Social Security " << matchSocial
             << " was removed\n";
     }
     // ONE child (has LEFT child)
@@ -200,7 +204,7 @@ void Datastructure::RemoveMatch(Datastructure::node* parent, Datastructure::node
         match->left = NULL;
         delptr = match;
         delete delptr;
-        cout << " Node with Social Security " << matchSocial
+        cout << "Node with Social Security " << matchSocial
             << " was removed\n";
     }
     // 2 children
@@ -214,7 +218,7 @@ void Datastructure::RemoveMatch(Datastructure::node* parent, Datastructure::node
         int temp3 = smallestNodeInRightSubtree->socialSecurity;
 
         // Removes smallest node in right subtree
-        RemoveNode_P(smallestNodeInRightSubtree->socialSecurity, match);
+        RemoveEntry_P(smallestNodeInRightSubtree->socialSecurity, match);
         
         // Data moves to the root node
         match->name = temp1;
@@ -232,24 +236,15 @@ void Datastructure::RemoveRootMatch(Datastructure::node* &root)
     // ZERO children
     if (root->left == NULL && root->right == NULL)
     {
-        cout << "Hello2" << endl;
-        // root->socialSecurity = 000000;
-        // root->name =           "Empty";
-        // root->occupation =     "Empty";
         delete delptr;
         root = CreateLeaf(000000, "Empty", "Empty");
     }
     // One Child (only has RIGHT child)
     else if (root->left == NULL && root->right != NULL)
     {
-        // root = root->right;
-        // delete delptr;
-
-
         root = root->right;
         delptr->right = NULL;
 
-        // cout << delptr->name << "\t" << delptr->occupation << endl;
         delete delptr;
         cout << "Root node with Social Security " << rootSocial
             << " has been deleted\n"
@@ -279,7 +274,7 @@ void Datastructure::RemoveRootMatch(Datastructure::node* &root)
         int temp3 = smallestNodeInRightSubtree->socialSecurity;
 
         // Removes smallest node in right subtree
-        RemoveNode_P(smallestNodeInRightSubtree->socialSecurity, root);
+        RemoveEntry_P(smallestNodeInRightSubtree->socialSecurity, root);
 
         // Data moves to the root node
         root->name = temp1;

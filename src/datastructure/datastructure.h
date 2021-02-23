@@ -28,14 +28,14 @@ namespace datastructure_std
         node* HashTable[tableSize];
 
         // Used to traverse the tree if the main index is filled up
-        void AddElemToTree(int socialSecurity, string name, string occupation, Datastructure::node* root);
+        void AddEntryToTree(int socialSecurity, string name, string occupation, Datastructure::node* root);
 
         // Deletes a subtree recursively 
         int DeleteSubTree(Datastructure::node* ptr);
 
         void PrintDatabaseInOrder_P(Datastructure::node* ptr);
 
-        void RemoveNode_P(int socialSecurity, Datastructure::node* parent);
+        void RemoveEntry_P(int socialSecurity, Datastructure::node* parent);
 
         void RemoveMatch(Datastructure::node* parent, Datastructure::node* match, bool left);
 
@@ -65,7 +65,7 @@ namespace datastructure_std
         // A:   Integer, String, String
         // RT:  Void
         // Adds a new entry to the datastructure
-        void AddElem(int socialSecurity, string name, string occupation);
+        void AddEntry(int socialSecurity, string name, string occupation);
 
         //
         int NumberOfItemsInBucket(int index);
@@ -85,7 +85,7 @@ namespace datastructure_std
         string GetOccupation(int socialSecurity);
 
         //
-        void RemoveNode(int socialSecurity);
+        void RemoveEntry(int socialSecurity);
     };
 }
 
