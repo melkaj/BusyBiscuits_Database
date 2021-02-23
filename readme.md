@@ -1,5 +1,11 @@
 ## DURING DEVELOPMENT, README MAY OR MAY NOT BE UP TO DATE ##
 
+## Technologies ##
+ - Used Visual Studio Code as my editor
+ - Ubuntu as the OS
+ - Make sure you have **CMake** on your computer
+    - On Ubuntu, the command is **sudo apt-get install cmake**
+
 ## Building the Project ##
  - Using CMake for builds. Create a builds folder at the root so that the file structure looks like the following:
  ```text
