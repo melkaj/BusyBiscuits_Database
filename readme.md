@@ -7,7 +7,7 @@
     - On Ubuntu, the command is **sudo apt-get install cmake**
 
 ## Building the Project ##
- - Using CMake for builds. Create a builds folder at the root so that the file structure looks like the following:
+ - Using CMake for builds. Create a builds folder by executing **mkdir build** at the root of the project. Then the file structure should look like the following:
  ```text
 BusyBiscuits_Database
     +---src
@@ -20,11 +20,7 @@ BusyBiscuits_Database
     +---buildandrun.sh
     +---LICENSE
 ```
- - There are bash scripts used utilize the CMake files. First, make sure you have a build folder. 
-```
-mkdir build
-```
- - Then you can execute the GenerateMakeFiles.sh file to use CMake to generate the make files for both the main program and for the tests
+ - There are bash scripts used to utilize the CMake files. Then you can execute the GenerateMakeFiles.sh file to use CMake to generate the make files for both the main program and for the tests
 ```
 ./GenerateMakeFiles.sh
 ```
