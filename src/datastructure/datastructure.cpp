@@ -1,3 +1,11 @@
+// ======================================================================
+// BusyBiscuits - Database (Name subject to change)
+//
+// datastructure.cpp - Datastructure class
+//
+// Written by: Meldin Kajoshaj, 2021
+// ======================================================================
+
 #include "datastructure.h"
 #include <iostream>
 #include <string>
@@ -5,6 +13,15 @@
 using namespace datastructure_std;
 using namespace std;
 
+
+
+/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * A:  None
+ * RT: None
+ * 
+ * Initializes the hashtable with default values
+ * 
+ */
 Datastructure::Datastructure()
 {
     for (int i = 0; i < tableSize; i++) 
@@ -13,6 +30,16 @@ Datastructure::Datastructure()
     }
 }
 
+
+
+/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * A:  None
+ * RT: None
+ * 
+ * Deletes the datastructure that was added on the heap. Traverses through
+ *      each bianry tree and deletes all the entrees
+ * 
+ */
 Datastructure::~Datastructure()
 {
     int count = 0;
@@ -24,6 +51,18 @@ Datastructure::~Datastructure()
     cout << "======================================================================" << endl;
 }
 
+
+
+/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * A:  Datastructure::node*
+ * RT: Integer
+ * 
+ * Returns the amount of nodes that were deleted in the given tree
+ * Function used to recursively delete nodes from the heap 
+ *      After a node is deleted, a counter is incremented and returned 
+ *      to the calling function
+ * 
+ */
 int Datastructure::DeleteSubTree(Datastructure::node* ptr)
 {
     int count = 0;
@@ -38,11 +77,31 @@ int Datastructure::DeleteSubTree(Datastructure::node* ptr)
     return count;
 }
 
+
+
+/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * A:  Integer
+ * RT: Integer
+ * 
+ * Returns the index that a given 'key' should be placed in.
+ *      Right now, the Hash function is EXTREMELY simple and needs to be 
+ *      sreplaced with something a bit more robust
+ * 
+ */
 int Datastructure::Hash(int key)
 {
     return (key * 13) % tableSize;
 }
 
+
+
+/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * A:  Integer, String, String
+ * RT: DataStructure::node*
+ * 
+ * Returns a new 'node' (data entry) that holds the arguments as its values
+ * 
+ */
 Datastructure::node* Datastructure::CreateLeaf(int socialSecurity, string name, string occupation)
 {
     node* newLeaf = new node;
@@ -55,6 +114,18 @@ Datastructure::node* Datastructure::CreateLeaf(int socialSecurity, string name, 
     return newLeaf;
 }
 
+
+
+/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * A:  Integer, String, String, Datastructure::node*
+ * RT: Void
+ * 
+ * Adds a new entry to the binary tree that is attache to the index in the 
+ *      table. This function is called when there was a collision in the 
+ *      hashtable and the given key needs to be placed in the binary tree 
+ *      instead of the table itself. 
+ * 
+ */
 void Datastructure::AddEntryToTree(int socialSecurity, string name, string occupation, Datastructure::node* root)
 {  
     if (socialSecurity < root->socialSecurity)       // Less than
@@ -75,6 +146,18 @@ void Datastructure::AddEntryToTree(int socialSecurity, string name, string occup
     }
 }
 
+
+
+/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * A:  Integer, String, String
+ * RT: Void
+ * 
+ * Adds a new entry into the datastructure. If there is no collision in the
+ *      hashtable, then the entry is placed on the table itself. If there 
+ *      is a collision then it shall be placed in the binary tree that is
+ *      attached to the index in the table.
+ * 
+ */
 void Datastructure::AddEntry(int socialSecurity, string name, string occupation)
 {
     int index = Hash(socialSecurity);
@@ -93,6 +176,16 @@ void Datastructure::AddEntry(int socialSecurity, string name, string occupation)
     }
 }
 
+
+
+/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * A:  None
+ * RT: Void
+ * 
+ * Prints the entire table. Traverses through the hashtable and calls the
+ *      private function to print out the binary tree that is at that index
+ * 
+ */
 void Datastructure::PrintDatabaseInOrder()
 {
     for (int i = 0; i < tableSize; i++)
@@ -103,7 +196,16 @@ void Datastructure::PrintDatabaseInOrder()
     cout << "======================================================================" << endl;
 }
 
-void Datastructure::PrintDatabaseInOrder_P(node* ptr)
+
+
+/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * A:  Datastructure::node*
+ * RT: Void
+ * 
+ * Prints the inorder traversal of a given binary tree
+ * 
+ */
+void Datastructure::PrintDatabaseInOrder_P(Datastructure::node* ptr)
 {
     if (ptr->left != NULL)  PrintDatabaseInOrder_P(ptr->left);
     cout << "\tName: " << ptr->name << endl;
@@ -122,6 +224,18 @@ void Datastructure::PrintDatabaseInOrder_P(node* ptr)
     if (ptr->right != NULL) PrintDatabaseInOrder_P(ptr->right);
 }
 
+
+
+/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * A:  Integer
+ * RT: Void
+ * 
+ * Checks if the given socialSecurity is in the hashtable. If so, then
+ *      call the helper function to remove the root of the tree and 
+ *      have it be replaced if necessary. If not, then call the other
+ *      helper function to search through tree and remove it if possible
+ * 
+ */
 void Datastructure::RemoveEntry(int socialSecurity)
 {
     int index = Hash(socialSecurity);
@@ -129,7 +243,6 @@ void Datastructure::RemoveEntry(int socialSecurity)
     if (HashTable[index]->socialSecurity == socialSecurity)
     {
         RemoveRootMatch(HashTable[index]);
-        cout << "Fourth pass\t" << HashTable[index]->name << "\t" << HashTable[index]->occupation << endl;
     }
     else   
     {
@@ -137,7 +250,18 @@ void Datastructure::RemoveEntry(int socialSecurity)
     }
 }
 
-void Datastructure::RemoveEntry_P(int socialSecurity, node* parent)
+
+
+/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * A:  Integer, Datastructure::node*
+ * RT: Void
+ * 
+ * Recursively traverses through the given binary tree to search for desired node.
+ *      If found then call helper function to remove it and have it replaced
+ *      if necessary. If not found, then console log that it was not found
+ * 
+ */
+void Datastructure::RemoveEntry_P(int socialSecurity, Datastructure::node* parent)
 {
     // socialSecurity is less than parent socialSecurity, 
     // and its looking at something to the left
@@ -158,10 +282,21 @@ void Datastructure::RemoveEntry_P(int socialSecurity, node* parent)
     // No match in database
     else
     {
-        cout << "socialSecurity was not found" << endl;
+        cout << "Desired entry with social security of (" << socialSecurity 
+            << ") was not found" << endl;
     }
 }
 
+
+
+/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * A:  Datastrucure::node*, Datastrucure::node*, Bool
+ * RT: Void
+ * 
+ * Removes the node and reconnects the tree accordingly based on specific 
+ *      orientations parent-match relationship
+ * 
+ */
 void Datastructure::RemoveMatch(Datastructure::node* parent, Datastructure::node* match, bool left)
 {
     node* delptr;
@@ -227,6 +362,15 @@ void Datastructure::RemoveMatch(Datastructure::node* parent, Datastructure::node
     }
 }
 
+
+ 
+/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * A:  Datastructure::node*
+ * RT: Void
+ * 
+ * Removes root of the binary tree
+ * 
+ */
 void Datastructure::RemoveRootMatch(Datastructure::node* &root)
 {
     node* delptr = root;
@@ -285,6 +429,15 @@ void Datastructure::RemoveRootMatch(Datastructure::node* &root)
     }
 }
 
+
+
+/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * A:  Datastructure::node*
+ * RT: Datastrucutre::node*
+ * 
+ * Finds the smallest valued node in the right subtree of the given node
+ * 
+ */
 Datastructure::node* Datastructure::FindSmallestNodePrivate(Datastructure::node* ptr)
 {
     if (ptr->left != NULL)
@@ -293,6 +446,17 @@ Datastructure::node* Datastructure::FindSmallestNodePrivate(Datastructure::node*
         return ptr;
 }
 
+
+
+/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * A:  Datastructure::node*
+ * RT: Datastructure::node*
+ * 
+ * Recursively traverses through the binary tree to find and return node
+ *      with desired social security. If not found, then a default node 
+ *      is generated and returned. 
+ * 
+ */
 Datastructure::node* Datastructure::GetTargetNode(Datastructure::node* ptr, int socialSecurity)
 {
     if (ptr->socialSecurity == socialSecurity)                            return ptr;
@@ -301,6 +465,15 @@ Datastructure::node* Datastructure::GetTargetNode(Datastructure::node* ptr, int 
     return CreateLeaf(100000, "Empty", "Empty");
 }
 
+
+
+/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * A:  Integer
+ * RT: String
+ * 
+ * Returns occupation of desired data entry
+ * 
+ */
 string Datastructure::GetOccupation(int socialSecurity)
 {
     int index = Hash(socialSecurity);

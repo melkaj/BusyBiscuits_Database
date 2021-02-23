@@ -1,5 +1,12 @@
+// ======================================================================
+// BusyBiscuits - Database (Name subject to change)
+//
+// datastructure.h - Header file for Datastructure class
+//
+// Written by: Meldin Kajoshaj, 2021
+// ======================================================================
+
 #pragma once
-#include "../binarytree/binarytree.h"
 #include <string>
 
 using namespace std;
@@ -24,68 +31,33 @@ namespace datastructure_std
             node* right;
         };
 
-        // Array of node pointers. Each node creates a binary tree
-        node* HashTable[tableSize];
+        node*           HashTable[tableSize];
 
-        // Used to traverse the tree if the main index is filled up
-        void AddEntryToTree(int socialSecurity, string name, string occupation, Datastructure::node* root);
+        int             DeleteSubTree           (node* ptr);
 
-        // Deletes a subtree recursively 
-        int DeleteSubTree(Datastructure::node* ptr);
+        void            PrintDatabaseInOrder_P  (node* ptr);
+        void            AddEntryToTree          (int socialSecurity, string name, string occupation, node* root);
+        void            RemoveEntry_P           (int socialSecurity, node* parent);
+        void            RemoveMatch             (node* parent, node* match, bool left);
+        void            RemoveRootMatch         (node* &root);
 
-        void PrintDatabaseInOrder_P(Datastructure::node* ptr);
+        node*           FindSmallestNodePrivate (node* ptr);
+        node*           GetTargetNode           (node* ptr, int socialSecurity);
 
-        void RemoveEntry_P(int socialSecurity, Datastructure::node* parent);
-
-        void RemoveMatch(Datastructure::node* parent, Datastructure::node* match, bool left);
-
-        void RemoveRootMatch(Datastructure::node* &root);
-
-        Datastructure::node* FindSmallestNodePrivate(Datastructure::node* ptr);
-
-        // A:   pointer to a node, integer
-        // RT:  pointer to a node
-        // Returns the desired node based on social security. If no node is found, then a 
-        //  generic one is returned (ie. ss=100000, "Empty", "Empty")
-        Datastructure::node* GetTargetNode(Datastructure::node* ptr, int socialSecurity);
 
     public:  
-        // Intializes hashtable with empty entries
+        // Intializes hashtable with empty entries and deletes them all when program ends
         Datastructure();
-
-        // TODO: ONCE DATASTRUCTURE IS FINISHED, CLEANUP PROPERLY    
         ~Datastructure();
 
-        // Hash function
-        int Hash(int key);
+        int             Hash                    (int key);
+        node*           CreateLeaf              (int socialSecurity, string name, string occupation);
 
-        // Creates new node 
-        node* CreateLeaf(int socialSecurity, string name, string occupation);
+        void            AddEntry                (int socialSecurity, string name, string occupation);
+        void            RemoveEntry             (int socialSecurity);
+        void            PrintDatabaseInOrder    ();
 
-        // A:   Integer, String, String
-        // RT:  Void
-        // Adds a new entry to the datastructure
-        void AddEntry(int socialSecurity, string name, string occupation);
-
-        //
-        int NumberOfItemsInBucket(int index);
-
-        // A:   None
-        // RT:  None
-        // Prints binary tree for each index in the hash table from (0->len(hashtable))
-        void PrintDatabaseInOrder();
-
-        // 
-        void PrintItemsInBucket(int index);
-
-        // A:   Integer
-        // RT:  String
-        // Returns the occupation of the data entry with the given social security
-        //  If no entry is found, then "Empty is returned"
-        string GetOccupation(int socialSecurity);
-
-        //
-        void RemoveEntry(int socialSecurity);
+        string          GetOccupation           (int socialSecurity);
     };
 }
 
