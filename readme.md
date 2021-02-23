@@ -15,10 +15,8 @@ BusyBiscuits_Database
     +---.gitignore
     +---CMkakesList.txt
     +---readme.md
-    +---run.sh
-    +---build.sh
-    +---buildandrun.sh
     +---LICENSE
+    +---(And then some other files and folders)
 ```
  - There are bash scripts used to utilize the CMake files. Then you can execute the GenerateMakeFiles.sh file to use CMake to generate the make files for both the main program and for the tests
 ```
