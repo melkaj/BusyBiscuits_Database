@@ -7,6 +7,9 @@ TEST_CASE("Testing the datastructure stuff...")
 {
     datastructure_std::Datastructure ds;
     ds.AddElem(100001, "name", "occ");
+
+    // REQUIRE(ds.GetOccupation);
+
     int temp = 0;
     REQUIRE(temp == 0);
 }

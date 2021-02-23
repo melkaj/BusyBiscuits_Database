@@ -57,7 +57,7 @@ int main(int argc, char** argv)
 		"Veronica", "Jon", "Jannise", "Liz", "Isabella",
 		"Victor" };
 
-	string jobs[16] = { "developer", "Marketing", "IT" , "Retired",
+	string jobs[16] = { "Engineer", "Marketing", "IT" , "Retired",
 		"Cleaning", "Bank", "Consultant", "Waiter", "LS Sales", "TV Sales",
 		"Paper Sales", "Fighter", "Secretary", "Driver", "Racer",
 		"Intern" };
@@ -81,10 +81,16 @@ int main(int argc, char** argv)
 	// Printing the elements
 	dt.PrintDatabaseInOrder();
 
+	for (int i = 0; i < 5; i++)
+	{
+		cout << "Occupation of " << sos+i << ": " << dt.GetOccupation(sos+i) << endl;
+	}
+	cout << "Occupation of " << 130000 << ": " << dt.GetOccupation(130000) << endl;
+
 	// dt.RemoveNode(120001);
 
 	// Printing the elements
-	dt.PrintDatabaseInOrder();
+	// dt.PrintDatabaseInOrder();
 
 
 

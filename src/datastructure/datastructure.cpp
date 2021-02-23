@@ -298,5 +298,19 @@ Datastructure::node* Datastructure::FindSmallestNodePrivate(Datastructure::node*
         return ptr;
 }
 
+Datastructure::node* Datastructure::GetTargetNode(Datastructure::node* ptr, int socialSecurity)
+{
+    if (ptr->socialSecurity == socialSecurity)                            return ptr;
+    else if (ptr->socialSecurity > socialSecurity && ptr->left != NULL)   return GetTargetNode(ptr->left, socialSecurity);
+    else if (ptr->socialSecurity < socialSecurity && ptr->right != NULL)  return GetTargetNode(ptr->right, socialSecurity);
+    return CreateLeaf(100000, "Empty", "Empty");
+}
 
-// TODO: Work on removing and all other funtionality
+string Datastructure::GetOccupation(int socialSecurity)
+{
+    int index = Hash(socialSecurity);
+
+    Datastructure::node* foundNode = GetTargetNode(HashTable[index], socialSecurity);
+
+    return foundNode->occupation;
+}
