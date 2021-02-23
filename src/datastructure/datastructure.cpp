@@ -105,7 +105,7 @@ void Datastructure::PrintDatabaseInOrder()
 void Datastructure::PrintDatabaseInOrder_P(node* ptr)
 {
     if (ptr->left != NULL)  PrintDatabaseInOrder_P(ptr->left);
-    cout << "\tName: " << ptr->name << endl;
+    cout << "\tName: " << ptr->name << "(" << &ptr << ")" << endl;
     cout << "\tSS: " << ptr->socialSecurity << endl;
     cout << "\tOccupation: " << ptr->occupation << endl;
     cout << "\tleft: " << ptr->left;
