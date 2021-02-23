@@ -10,17 +10,12 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -std=c++14")
 # Recursively searches through paths to find all .cpp files
 # file(GLOB_RECURSE source_files "src/*.cpp" "lib/*.cpp")
 
-
-
 # option(TestOption "TestOption" OFF)
 # if (TestOption EQUAL "ON")
 #     add_subdirectory()
 add_subdirectory(src)
 add_subdirectory(lib)
 add_subdirectory(test)
-
-# Printing message to the console
-# message (${source_files})
 
 # Compiling the files in the 'source_files' variable and naming the 
 #   executable 'main'

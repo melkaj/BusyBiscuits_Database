@@ -5,9 +5,7 @@
 #include <iostream>
 #include <string>
 
-using namespace BT_std;
-using namespace Database_std;
-using namespace HashT_std;
+using namespace database_std;
 using namespace std;
 
 Database::Database()

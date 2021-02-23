@@ -51,8 +51,9 @@ namespace datastructure_std
         ~Datastructure();
 
         int             Hash                    (int key);
+        
         node*           CreateLeaf              (int socialSecurity, string name, string occupation);
-
+        
         void            AddEntry                (int socialSecurity, string name, string occupation);
         void            RemoveEntry             (int socialSecurity);
         void            PrintDatabaseInOrder    ();

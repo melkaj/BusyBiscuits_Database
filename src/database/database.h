@@ -1,18 +1,14 @@
 #pragma once
-#include "../binarytree/binarytree.h"
-#include "../hashtable/hashtable.h"
 #include <cstdlib>
 #include <iostream>
 #include <string>
 
-using namespace BT_std;
-using namespace HashT_std;
 using namespace std;
 
 #ifndef DATABASE_H
 #define DATABASE_H
 
-namespace Database_std
+namespace database_std
 {
 	class Database
 	{
