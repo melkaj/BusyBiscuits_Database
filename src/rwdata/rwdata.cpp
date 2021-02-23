@@ -1,24 +1,23 @@
 
-#include "database.h"
-#include <cstdlib>
+#include "rwdata.h"
 #include <fstream>
 #include <iostream>
 #include <string>
 
-using namespace database_std;
+using namespace rwdata_std;
 using namespace std;
 
-Database::Database()
+RWData::RWData()
 {
-	cout << "Hello from the database constructor" << endl;
+	cout << "Hello from the RWData constructor" << endl;
 }
 
-Database::~Database()
+RWData::~RWData()
 {
-	cout << "Goodbye from deconstructor, object is being destroyed..." << endl;
+	cout << "Goodbye from RWData deconstructor, object is being destroyed..." << endl;
 }
 
-void Database::ReadInData()
+void RWData::ReadInData()
 {
 	string line;
 	ifstream datafile("/home/mel/Desktop/BusyBiscuits_Database/src/open.txt");
@@ -28,7 +27,10 @@ void Database::ReadInData()
 		int count = 0;
 		while(getline(datafile, line))
 		{
+			// Checking if the first character of the input is a number
+			// signifying that a new entry has started
 			if (int(line[0]) > 47 && int(line[0]) < 59)	count++;
+			// cout << line << endl;
 		}
 		cout << "count: " << count << endl;
 		datafile.close();
@@ -36,7 +38,7 @@ void Database::ReadInData()
 	else cout << "Unable to open file" << endl;
 }
 
-void Database::WriteData()
+void RWData::WriteData()
 {
 	string line;
 	ofstream datafile("/home/mel/Desktop/BusyBiscuits_Database/src/open.txt", ios::app);

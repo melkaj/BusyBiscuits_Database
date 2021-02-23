@@ -1,8 +1,5 @@
 add_library(
     ds
-    database/database.cpp
+    rwdata/rwdata.cpp
     datastructure/datastructure.cpp
 )
-
-# add_executable(main main.cpp)
-

@@ -1,23 +1,22 @@
 #pragma once
-#include <cstdlib>
 #include <iostream>
 #include <string>
 
 using namespace std;
 
-#ifndef DATABASE_H
-#define DATABASE_H
+#ifndef RWDATA_H
+#define RWDATA_H
 
-namespace database_std
+namespace rwdata_std
 {
-	class Database
+	class RWData
 	{
 	private:
 
 
 	public:
-		Database();
-		~Database();
+		RWData();
+		~RWData();
 
 		void ReadInData();
 		void WriteData();
@@ -25,4 +24,4 @@ namespace database_std
 	};
 }
 
-#endif	// DATABASE_H
+#endif	// RWDATA_H
