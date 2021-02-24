@@ -1,4 +1,5 @@
 
+#include "../datastructure/datastructure.h"
 #include "rwdata.h"
 #include <fstream>
 #include <iostream>
@@ -116,6 +117,41 @@ void RWData::WriteData()
 
 
 /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * A:  Integer, String, String, Bool
+ * RT: Void
+ * 
+ * Writes given entries to the file. If bool is set to false, then the data
+ * 		will be appended to the file. If its set to true, then the data will
+ * 		overwrite the file
+ * 
+ */
+void RWData::WriteData(int socialSecurity, string name, string occupation, bool isOverwrite)
+{
+	string line;
+	ofstream datafile;
+
+	string db1 = "/home/mel/Desktop/BusyBiscuits_Database/src/db1.txt";
+	string db2 = "/home/mel/Desktop/BusyBiscuits_Database/src/db2.txt";
+
+	if 		(this->fileNumber == 1 && isOverwrite == false)	 datafile.open(db1, ios::app);
+	else if (this->fileNumber == 2 && isOverwrite == false)	 datafile.open(db2, ios::app);
+	else if (this->fileNumber == 1 && isOverwrite == true)	 datafile.open(db1, ios::out);
+	else if (this->fileNumber == 2 && isOverwrite == true)	 datafile.open(db2, ios::out);
+	else	cout << "Something went wrong in RWData::WriteData..." << endl;
+
+	if (datafile.is_open())
+	{
+		datafile << socialSecurity << endl;
+		datafile << name << endl;
+		datafile << occupation << endl;
+		datafile.close();
+	} 
+	else cout << "Unable to open file" << endl;
+}
+
+
+
+/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * A:  Integer, String, String
  * RT: Void
  * 
@@ -138,5 +174,61 @@ void RWData::AppendData(int socialSecurity, string name, string occupation)
 		datafile.close();
 	}
 	else  cout << "Something went wrong in RWData::AppendData..." << endl;
+}
 
+
+
+/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * A:  None
+ * RT: Void
+ * 
+ * Toggles to private variable 'fileNumber'. Meaning, the main file will be
+ * 		switched to the other one 
+ * 
+ */
+void RWData::ToggleMainFile()
+{
+	this->fileNumber += 1 % 2;
+}
+
+
+
+/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * A:  None
+ * RT: Void
+ * 
+ * Reads in the file and prints the data
+ * 
+ */
+void RWData::ReadInData(datastructure_std::Datastructure* &datastructure)
+{
+	string line;
+	ifstream datafile;
+
+	// Opening the 'main' storage file
+	if      (this->fileNumber == 1)	 datafile.open("/home/mel/Desktop/BusyBiscuits_Database/src/db1.txt");
+	else if (this->fileNumber == 2)  datafile.open("/home/mel/Desktop/BusyBiscuits_Database/src/db2.txt");
+	else							 cout << "Something went wrong in RWData::ReadInData(datastructure)..." << endl;
+
+	if (datafile.is_open())
+	{
+		int  count = 0;
+		bool isName = false;
+		int ss;
+		string nm, occ;
+
+		while(getline(datafile, line))
+		{
+			if (count < 3)
+			{
+				// When input is a number meaning its the social security
+				if (int(line[0]) > 47 && int(line[0]) < 59)  count++;
+			}
+			
+
+		}
+		cout << "count: " << count << endl;
+		datafile.close();
+	}
+	else cout << "Unable to open file (ReadInData(datastructure))" << endl;
 }
