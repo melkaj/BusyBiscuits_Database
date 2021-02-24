@@ -4,14 +4,12 @@
 
 using namespace std;
 
-#ifndef RWDATA_H
-#define RWDATA_H
-
 namespace rwdata_std
 {
 	class RWData
 	{
 	private:
+		int fileNumber;
 
 
 	public:
@@ -21,7 +19,7 @@ namespace rwdata_std
 		void ReadInData();
 		void WriteData();
 
+		void AppendData(int socialSecurity, string name, string occupation);
+
 	};
 }
-
-#endif	// RWDATA_H
