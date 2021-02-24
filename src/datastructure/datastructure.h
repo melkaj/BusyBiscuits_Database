@@ -11,8 +11,8 @@
 
 using namespace std;
 
-#ifndef DATASTRUCTURE_H
-#define DATASTRUCTURE_H
+// #ifndef DATASTRUCTURE_H
+// #define DATASTRUCTURE_H
 
 namespace datastructure_std
 {
@@ -24,7 +24,7 @@ namespace datastructure_std
         // Person structure
         struct node
         {
-            int socialSecurity;
+            string socialSecurity;
             string name;
             string occupation;
             node* left;
@@ -36,13 +36,13 @@ namespace datastructure_std
         int             DeleteSubTree           (node* ptr);
 
         void            PrintDatabaseInOrder_P  (node* ptr);
-        void            AddEntryToTree          (int socialSecurity, string name, string occupation, node* root);
-        void            RemoveEntry_P           (int socialSecurity, node* parent);
+        void            AddEntryToTree          (string socialSecurity, string name, string occupation, node* root);
+        void            RemoveEntry_P           (string socialSecurity, node* parent);
         void            RemoveMatch             (node* parent, node* match, bool left);
         void            RemoveRootMatch         (node* &root);
 
         node*           FindSmallestNodePrivate (node* ptr);
-        node*           GetTargetNode           (node* ptr, int socialSecurity);
+        node*           GetTargetNode           (node* ptr, string socialSecurity);
 
 
     public:  
@@ -50,16 +50,16 @@ namespace datastructure_std
         Datastructure();
         ~Datastructure();
 
-        int             Hash                    (int key);
+        int             Hash                    (string key);
         
-        node*           CreateLeaf              (int socialSecurity, string name, string occupation);
+        node*           CreateLeaf              (string socialSecurity, string name, string occupation);
         
-        void            AddEntry                (int socialSecurity, string name, string occupation);
-        void            RemoveEntry             (int socialSecurity);
+        void            AddEntry                (string socialSecurity, string name, string occupation);
+        void            RemoveEntry             (string socialSecurity);
         void            PrintDatabaseInOrder    ();
 
-        string          GetOccupation           (int socialSecurity);
+        string          GetOccupation           (string socialSecurity);
     };
 }
 
-#endif  // DATASTRUCTURE_H
+// #endif  // DATASTRUCTURE_H

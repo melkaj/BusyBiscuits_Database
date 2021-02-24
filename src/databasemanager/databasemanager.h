@@ -29,8 +29,8 @@ namespace databasemanager_std
         public:
             DatabaseManager();
             ~DatabaseManager();
-            void                                AddEntry        (int socialSecurity, string name, string occupation);
-            void                                RemoveEntry     (int socialSecurity);
+            void                                AddEntry        (string socialSecurity, string name, string occupation);
+            void                                RemoveEntry     (string socialSecurity);
 
     };
 }

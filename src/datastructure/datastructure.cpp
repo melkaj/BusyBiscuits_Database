@@ -26,7 +26,7 @@ Datastructure::Datastructure()
 {
     for (int i = 0; i < tableSize; i++) 
     {
-        HashTable[i] = CreateLeaf(000000, "Empty", "Empty");
+        HashTable[i] = CreateLeaf("000000", "Empty", "Empty");
     }
 }
 
@@ -88,9 +88,12 @@ int Datastructure::DeleteSubTree(Datastructure::node* ptr)
  *      sreplaced with something a bit more robust
  * 
  */
-int Datastructure::Hash(int key)
+int Datastructure::Hash(string key)
 {
-    return (key * 13) % tableSize;
+    int total = 0;
+    for (long unsigned int i = 0; i < key.length(); i++)  total += int(key[i]);
+
+    return total % tableSize;
 }
 
 
@@ -102,7 +105,7 @@ int Datastructure::Hash(int key)
  * Returns a new 'node' (data entry) that holds the arguments as its values
  * 
  */
-Datastructure::node* Datastructure::CreateLeaf(int socialSecurity, string name, string occupation)
+Datastructure::node* Datastructure::CreateLeaf(string socialSecurity, string name, string occupation)
 {
     node* newLeaf = new node;
     newLeaf->socialSecurity = socialSecurity;
@@ -126,7 +129,7 @@ Datastructure::node* Datastructure::CreateLeaf(int socialSecurity, string name, 
  *      instead of the table itself. 
  * 
  */
-void Datastructure::AddEntryToTree(int socialSecurity, string name, string occupation, Datastructure::node* root)
+void Datastructure::AddEntryToTree(string socialSecurity, string name, string occupation, Datastructure::node* root)
 {  
     if (socialSecurity < root->socialSecurity)       // Less than
     {
@@ -158,12 +161,12 @@ void Datastructure::AddEntryToTree(int socialSecurity, string name, string occup
  *      attached to the index in the table.
  * 
  */
-void Datastructure::AddEntry(int socialSecurity, string name, string occupation)
+void Datastructure::AddEntry(string socialSecurity, string name, string occupation)
 {
     int index = Hash(socialSecurity);
 
     // Index in hashtable is empty
-    if (HashTable[index]->socialSecurity == 000000)
+    if (HashTable[index]->socialSecurity == "000000")
     {
         HashTable[index]->socialSecurity = socialSecurity;
         HashTable[index]->name = name;
@@ -236,7 +239,7 @@ void Datastructure::PrintDatabaseInOrder_P(Datastructure::node* ptr)
  *      helper function to search through tree and remove it if possible
  * 
  */
-void Datastructure::RemoveEntry(int socialSecurity)
+void Datastructure::RemoveEntry(string socialSecurity)
 {
     int index = Hash(socialSecurity);
 
@@ -261,7 +264,7 @@ void Datastructure::RemoveEntry(int socialSecurity)
  *      if necessary. If not found, then console log that it was not found
  * 
  */
-void Datastructure::RemoveEntry_P(int socialSecurity, Datastructure::node* parent)
+void Datastructure::RemoveEntry_P(string socialSecurity, Datastructure::node* parent)
 {
     // socialSecurity is less than parent socialSecurity, 
     // and its looking at something to the left
@@ -300,7 +303,7 @@ void Datastructure::RemoveEntry_P(int socialSecurity, Datastructure::node* paren
 void Datastructure::RemoveMatch(Datastructure::node* parent, Datastructure::node* match, bool left)
 {
     node* delptr;
-    int matchSocial = match->socialSecurity;
+    string matchSocial = match->socialSecurity;
     node* smallestNodeInRightSubtree;
 
     // ZERO children
@@ -350,7 +353,7 @@ void Datastructure::RemoveMatch(Datastructure::node* parent, Datastructure::node
         // temp strings to hold the data needed for the removal
         string temp1 = smallestNodeInRightSubtree->name;
         string temp2 = smallestNodeInRightSubtree->occupation;
-        int temp3 = smallestNodeInRightSubtree->socialSecurity;
+        string temp3 = smallestNodeInRightSubtree->socialSecurity;
 
         // Removes smallest node in right subtree
         RemoveEntry_P(smallestNodeInRightSubtree->socialSecurity, match);
@@ -374,14 +377,14 @@ void Datastructure::RemoveMatch(Datastructure::node* parent, Datastructure::node
 void Datastructure::RemoveRootMatch(Datastructure::node* &root)
 {
     node* delptr = root;
-    int rootSocial = root->socialSecurity;
+    string rootSocial = root->socialSecurity;
     node* smallestNodeInRightSubtree;
 
     // ZERO children
     if (root->left == NULL && root->right == NULL)
     {
         delete delptr;
-        root = CreateLeaf(000000, "Empty", "Empty");
+        root = CreateLeaf("000000", "Empty", "Empty");
     }
     // One Child (only has RIGHT child)
     else if (root->left == NULL && root->right != NULL)
@@ -415,7 +418,7 @@ void Datastructure::RemoveRootMatch(Datastructure::node* &root)
         // temp strings to hold the data needed for the removal
         string temp1 = smallestNodeInRightSubtree->name;
         string temp2 = smallestNodeInRightSubtree->occupation;
-        int temp3 = smallestNodeInRightSubtree->socialSecurity;
+        string temp3 = smallestNodeInRightSubtree->socialSecurity;
 
         // Removes smallest node in right subtree
         RemoveEntry_P(smallestNodeInRightSubtree->socialSecurity, root);
@@ -457,12 +460,12 @@ Datastructure::node* Datastructure::FindSmallestNodePrivate(Datastructure::node*
  *      is generated and returned. 
  * 
  */
-Datastructure::node* Datastructure::GetTargetNode(Datastructure::node* ptr, int socialSecurity)
+Datastructure::node* Datastructure::GetTargetNode(Datastructure::node* ptr, string socialSecurity)
 {
     if (ptr->socialSecurity == socialSecurity)                            return ptr;
     else if (ptr->socialSecurity > socialSecurity && ptr->left != NULL)   return GetTargetNode(ptr->left, socialSecurity);
     else if (ptr->socialSecurity < socialSecurity && ptr->right != NULL)  return GetTargetNode(ptr->right, socialSecurity);
-    return CreateLeaf(100000, "Empty", "Empty");
+    return CreateLeaf("100000", "Empty", "Empty");
 }
 
 
@@ -474,7 +477,7 @@ Datastructure::node* Datastructure::GetTargetNode(Datastructure::node* ptr, int 
  * Returns occupation of desired data entry
  * 
  */
-string Datastructure::GetOccupation(int socialSecurity)
+string Datastructure::GetOccupation(string socialSecurity)
 {
     int index = Hash(socialSecurity);
 

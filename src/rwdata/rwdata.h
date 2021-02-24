@@ -18,12 +18,12 @@ namespace rwdata_std
 
 		void 		ReadInData		();
 		void 		WriteData		();
-		void 		WriteData		(int socialSecurity, string name, string occupation, bool isOverwrite);
+		void 		WriteData		(string socialSecurity, string name, string occupation, bool isOverwrite);
 		void 		ToggleMainFile	();
 		void 		ReadInData(datastructure_std::Datastructure* &datastructure);
 
 
-		void 		AppendData		(int socialSecurity, string name, string occupation);
+		void 		AppendData		(string socialSecurity, string name, string occupation);
 
 	};
 }

@@ -125,7 +125,7 @@ void RWData::WriteData()
  * 		overwrite the file
  * 
  */
-void RWData::WriteData(int socialSecurity, string name, string occupation, bool isOverwrite)
+void RWData::WriteData(string socialSecurity, string name, string occupation, bool isOverwrite)
 {
 	string line;
 	ofstream datafile;
@@ -159,7 +159,7 @@ void RWData::WriteData(int socialSecurity, string name, string occupation, bool 
  * 		Use AppendData() to actually append user data to the files
  * 
  */
-void RWData::AppendData(int socialSecurity, string name, string occupation)
+void RWData::AppendData(string socialSecurity, string name, string occupation)
 {
 	ofstream datafile;
 	if 		(this->fileNumber == 1)	 datafile.open("/home/mel/Desktop/BusyBiscuits_Database/src/db1.txt", ios::app);
@@ -197,7 +197,7 @@ void RWData::ToggleMainFile()
  * A:  None
  * RT: Void
  * 
- * Reads in the file and prints the data
+ * Reads in the file and adds it to the datastructure
  * 
  */
 void RWData::ReadInData(datastructure_std::Datastructure* &datastructure)
@@ -214,21 +214,32 @@ void RWData::ReadInData(datastructure_std::Datastructure* &datastructure)
 	{
 		int  count = 0;
 		bool isName = false;
-		int ss;
-		string nm, occ;
+		string ss, nm, occ;
 
 		while(getline(datafile, line))
 		{
+			/** 
+			 * Stores the social security in the first IF stment and sets
+			 * flag letting the loop know the next input will be the NAME.
+			 * Name is recorded and flag is turned off. Then next input 
+			 * will be the occupation. Once the loop has gone 3 times,
+			 * the data is added to the datastructure 
+			 */
 			if (count < 3)
 			{
-				// When input is a number meaning its the social security
-				if (int(line[0]) > 47 && int(line[0]) < 59)  count++;
+				if (int(line[0]) > 47 && int(line[0]) < 59)  { ss = line;	isName = true; }
+				else if (isName == true)  					 { nm = line;	isName = false; }
+				else										 { occ = line; }
+				count++;
 			}
-			
-
+			else
+			{
+				datastructure->AddEntry(ss, nm, occ);
+			}
 		}
-		cout << "count: " << count << endl;
 		datafile.close();
 	}
 	else cout << "Unable to open file (ReadInData(datastructure))" << endl;
+
+	cout << "Data has been unloaded to the datastructure..." << endl;
 }

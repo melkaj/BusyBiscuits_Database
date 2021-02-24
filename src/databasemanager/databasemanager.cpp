@@ -50,7 +50,7 @@ DatabaseManager::~DatabaseManager()
  * Performing all the necessaary additions to the database and the file
  * 
  */
-void DatabaseManager::AddEntry(int socialSecurity, string name, string occupation)
+void DatabaseManager::AddEntry(string socialSecurity, string name, string occupation)
 {
     this->database.AddEntry(socialSecurity, name, occupation);
     this->rwdata.AppendData(socialSecurity, name, occupation);
