@@ -18,20 +18,19 @@ namespace rwdata_std
 	{
 	private:
 		int 		fileNumber;
+		string 		db1Filename, db2Filename;
 
+		void 		SaveData		();
 
 	public:
 		RWData						();
 		~RWData						();
+		string		Getdb1Filename  ();
+		string		Getdb2Filename  ();
 
-		void 		ReadInData		();
-		void 		WriteData		();
 		void 		WriteData		(string socialSecurity, string name, string occupation, bool isOverwrite);
+		void 		ReadInData		(datastructure_std::Datastructure &datastructure);
 		void 		ToggleMainFile	();
-		void 		ReadInData(datastructure_std::Datastructure &datastructure);
-
-
-		void 		AppendData		(string socialSecurity, string name, string occupation);
 
 	};
 }

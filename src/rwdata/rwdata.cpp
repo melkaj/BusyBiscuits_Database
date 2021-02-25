@@ -29,8 +29,12 @@ RWData::RWData()
 {
 	cout << "Hello from the RWData constructor" << endl;
 
+	// Initializing filenames
+	db1Filename = "/home/mel/Desktop/BusyBiscuits_Database/src/db1.txt";
+	db2Filename = "/home/mel/Desktop/BusyBiscuits_Database/src/db2.txt";
+
 	string line;
-	ifstream datafile("/home/mel/Desktop/BusyBiscuits_Database/src/db1.txt");
+	ifstream datafile(db1Filename);
 
 	if (datafile.is_open())
 	{
@@ -64,34 +68,17 @@ RWData::~RWData()
 
 /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * A:  None
- * RT: Void
+ * RT: String
  * 
- * Reads in the file and prints the data
+ * Getters for the filenames. The files are used for the handling of the data
+ * 		One file is used for modifications. And then when its time to save the 
+ *		data, the modifications are applied and all the data is stored on the
+ * 		other file
  * 
  */
-void RWData::ReadInData()
-{
-	string line;
-	ifstream datafile;
-	if      (this->fileNumber == 1)	 datafile.open("/home/mel/Desktop/BusyBiscuits_Database/src/db1.txt");
-	else if (this->fileNumber == 2)  datafile.open("/home/mel/Desktop/BusyBiscuits_Database/src/db2.txt");
-	else							 cout << "Something went wrong in RWData::ReadInData..." << endl;
 
-	if (datafile.is_open())
-	{
-		int count = 0;
-		while(getline(datafile, line))
-		{
-			// Checking if the first character of the input is a number
-			// signifying that a new entry has started
-			if (int(line[0]) > 47 && int(line[0]) < 59)	count++;
-			// cout << line << endl;
-		}
-		cout << "count: " << count << endl;
-		datafile.close();
-	}
-	else cout << "Unable to open file" << endl;
-}
+string RWData::Getdb1Filename()  { return db1Filename; } 
+string RWData::Getdb2Filename()  { return db2Filename; } 
 
 
 
@@ -99,26 +86,13 @@ void RWData::ReadInData()
  * A:  None
  * RT: Void
  * 
- * Writes to the file specific entries. Was used for testing in early development
- * 		Use AppendData() to actually append user data to the files
+ * Toggles to private variable 'fileNumber'. Meaning, the main file will be
+ * 		switched to the other one 
  * 
  */
-void RWData::WriteData()
+void RWData::ToggleMainFile()
 {
-	string line;
-	ofstream datafile;
-	if 		(this->fileNumber == 1)	 datafile.open("/home/mel/Desktop/BusyBiscuits_Database/src/db1.txt", ios::app);
-	else if (this->fileNumber == 2)	 datafile.open("/home/mel/Desktop/BusyBiscuits_Database/src/db2.txt", ios::app);
-	else						 	 cout << "Something went wrong in RWData::WriteData..." << endl;
-
-	if (datafile.is_open())
-	{
-		datafile << "123123" << endl;
-		datafile << "Dwight Schrute" << endl;
-		datafile << "Paper Salesman" << endl;
-		datafile.close();
-	} 
-	else cout << "Unable to open file" << endl;
+	this->fileNumber += 1 % 2;
 }
 
 
@@ -154,48 +128,6 @@ void RWData::WriteData(string socialSecurity, string name, string occupation, bo
 		datafile.close();
 	} 
 	else cout << "Unable to open file" << endl;
-}
-
-
-
-/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * A:  Integer, String, String
- * RT: Void
- * 
- * Writes to the file specific entries. Was used for testing in early development
- * 		Use AppendData() to actually append user data to the files
- * 
- */
-void RWData::AppendData(string socialSecurity, string name, string occupation)
-{
-	ofstream datafile;
-	if 		(this->fileNumber == 1)	 datafile.open("/home/mel/Desktop/BusyBiscuits_Database/src/db1.txt", ios::app);
-	else if (this->fileNumber == 2)	 datafile.open("/home/mel/Desktop/BusyBiscuits_Database/src/db2.txt", ios::app);
-	else						     cout << "Something went wrong in RWData::AppendData..." << endl;
-
-	if (datafile.is_open())
-	{
-		datafile << socialSecurity << endl;
-		datafile << name << endl;
-		datafile << occupation << endl;
-		datafile.close();
-	}
-	else  cout << "Something went wrong in RWData::AppendData..." << endl;
-}
-
-
-
-/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * A:  None
- * RT: Void
- * 
- * Toggles to private variable 'fileNumber'. Meaning, the main file will be
- * 		switched to the other one 
- * 
- */
-void RWData::ToggleMainFile()
-{
-	this->fileNumber += 1 % 2;
 }
 
 

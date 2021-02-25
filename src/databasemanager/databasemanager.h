@@ -31,5 +31,6 @@ namespace databasemanager_std
             void                                AddEntry        (string socialSecurity, string name, string occupation);
             void                                UpdateEntry     (string socialSecurity, string name, string occupation);
             void                                RemoveEntry     (string socialSecurity);
+            void                                SaveData        ();
     };
 }

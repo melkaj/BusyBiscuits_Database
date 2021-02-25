@@ -80,7 +80,7 @@ void DatabaseManager::AddEntry(string socialSecurity, string name, string occupa
  */
 void DatabaseManager::UpdateEntry(string socialSecurity, string name, string occupation)
 {
-    
+
 }
 
 
@@ -107,3 +107,18 @@ void DatabaseManager::RemoveEntry(string socialSecurity)
     if (found == this->mapOfIgnoredEntires.end())   this->mapOfIgnoredEntires[socialSecurity] = 1;
     else                                            this->mapOfIgnoredEntires[socialSecurity]++;
 }
+
+
+
+/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * A:  String
+ * RT: None
+ * 
+ * Restructuring the file so that the data in the file is most updated
+ * 
+ */
+void DatabaseManager::SaveData()
+{
+    this->rwdata.SaveData();
+}
+
