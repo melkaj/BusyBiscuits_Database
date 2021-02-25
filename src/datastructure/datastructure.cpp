@@ -70,7 +70,8 @@ int Datastructure::DeleteSubTree(Datastructure::node* ptr)
     {
         if (ptr->left != NULL)   count += DeleteSubTree(ptr->left);
         if (ptr->right != NULL)  count += DeleteSubTree(ptr->right);
-        cout << "From deconstructor helper function - Deleting node: " << ptr->name << endl;
+        cout << "From deconstructor helper function - Deleting node: " << 
+            ptr->socialSecurity << '\t' << ptr->name << '\t' << ptr->occupation << endl;
         delete ptr;
         count += 1;
     }

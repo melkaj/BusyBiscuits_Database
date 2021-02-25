@@ -14,7 +14,6 @@
 
 using namespace std;
 
-
 namespace databasemanager_std
 {
     class DatabaseManager
@@ -23,14 +22,14 @@ namespace databasemanager_std
             datastructure_std::Datastructure    database;
             rwdata_std::RWData                  rwdata;
 
-            unordered_map<int, int>             mapOfIgnoredEntires;
+            unordered_map<string, int>             mapOfIgnoredEntires;
 
 
         public:
             DatabaseManager();
             ~DatabaseManager();
             void                                AddEntry        (string socialSecurity, string name, string occupation);
+            void                                UpdateEntry     (string socialSecurity, string name, string occupation);
             void                                RemoveEntry     (string socialSecurity);
-
     };
 }

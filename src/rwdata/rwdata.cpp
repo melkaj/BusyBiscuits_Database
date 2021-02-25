@@ -1,3 +1,10 @@
+// ======================================================================
+// BusyBiscuits - Database (Name subject to change)
+//
+// rwdata.cpp - RWData class
+//
+// Written by: Meldin Kajoshaj, 2021
+// ======================================================================
 
 #include "../datastructure/datastructure.h"
 #include "rwdata.h"
@@ -200,7 +207,7 @@ void RWData::ToggleMainFile()
  * Reads in the file and adds it to the datastructure
  * 
  */
-void RWData::ReadInData(datastructure_std::Datastructure* &datastructure)
+void RWData::ReadInData(datastructure_std::Datastructure &datastructure)
 {
 	string line;
 	ifstream datafile;
@@ -232,9 +239,11 @@ void RWData::ReadInData(datastructure_std::Datastructure* &datastructure)
 				else										 { occ = line; }
 				count++;
 			}
-			else
+			if (count == 3)
 			{
-				datastructure->AddEntry(ss, nm, occ);
+				cout << ss << '\t' << nm << '\t' << occ << endl;
+				datastructure.AddEntry(ss, nm, occ);
+				count = 0;
 			}
 		}
 		datafile.close();
