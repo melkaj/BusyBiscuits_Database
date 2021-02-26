@@ -22,7 +22,7 @@ namespace databasemanager_std
             datastructure_std::Datastructure    database;
             rwdata_std::RWData                  rwdata;
 
-            unordered_map<string, int>             mapOfIgnoredEntires;
+            unordered_map<string, int>          mapOfIgnoredEntires;
 
 
         public:

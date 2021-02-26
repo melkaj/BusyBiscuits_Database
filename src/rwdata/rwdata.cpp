@@ -30,11 +30,11 @@ RWData::RWData()
 	cout << "Hello from the RWData constructor" << endl;
 
 	// Initializing filenames
-	db1Filename = "/home/mel/Desktop/BusyBiscuits_Database/src/db1.txt";
-	db2Filename = "/home/mel/Desktop/BusyBiscuits_Database/src/db2.txt";
+	db1FilePath = "/home/mel/Desktop/BusyBiscuits_Database/src/db1.txt";
+	db2FilePath = "/home/mel/Desktop/BusyBiscuits_Database/src/db2.txt";
 
-	string line;
-	ifstream datafile(db1Filename);
+	string   line;
+	ifstream datafile(db1FilePath);
 
 	if (datafile.is_open())
 	{
@@ -61,7 +61,7 @@ RWData::RWData()
  */
 RWData::~RWData()
 {
-	cout << "Goodbye from RWData deconstructor, object is being destroyed..." << endl;
+	cout << "RWData deconstructor...\n" << endl;
 }
 
 
@@ -77,8 +77,8 @@ RWData::~RWData()
  * 
  */
 
-string RWData::Getdb1Filename()  { return db1Filename; } 
-string RWData::Getdb2Filename()  { return db2Filename; } 
+string RWData::Getdb1FilePath()  { return db1FilePath; } 
+string RWData::Getdb2FilePath()  { return db2FilePath; } 
 
 
 
@@ -108,11 +108,11 @@ void RWData::ToggleMainFile()
  */
 void RWData::WriteData(string socialSecurity, string name, string occupation, bool isOverwrite)
 {
-	string line;
+	string   line;
 	ofstream datafile;
 
-	string db1 = "/home/mel/Desktop/BusyBiscuits_Database/src/db1.txt";
-	string db2 = "/home/mel/Desktop/BusyBiscuits_Database/src/db2.txt";
+	string   db1 = db1FilePath;
+	string   db2 = db2FilePath;
 
 	if 		(this->fileNumber == 1 && isOverwrite == false)	 datafile.open(db1, ios::app);
 	else if (this->fileNumber == 2 && isOverwrite == false)	 datafile.open(db2, ios::app);
@@ -141,12 +141,12 @@ void RWData::WriteData(string socialSecurity, string name, string occupation, bo
  */
 void RWData::ReadInData(datastructure_std::Datastructure &datastructure)
 {
-	string line;
+	string   line;
 	ifstream datafile;
 
 	// Opening the 'main' storage file
-	if      (this->fileNumber == 1)	 datafile.open("/home/mel/Desktop/BusyBiscuits_Database/src/db1.txt");
-	else if (this->fileNumber == 2)  datafile.open("/home/mel/Desktop/BusyBiscuits_Database/src/db2.txt");
+	if      (this->fileNumber == 1)	 datafile.open(db1FilePath);
+	else if (this->fileNumber == 2)  datafile.open(db2FilePath);
 	else							 cout << "Something went wrong in RWData::ReadInData(datastructure)..." << endl;
 
 	if (datafile.is_open())
@@ -166,9 +166,9 @@ void RWData::ReadInData(datastructure_std::Datastructure &datastructure)
 			 */
 			if (count < 3)
 			{
-				if (int(line[0]) > 47 && int(line[0]) < 59)  { ss = line;	isName = true; }
-				else if (isName == true)  					 { nm = line;	isName = false; }
-				else										 { occ = line; }
+				if 	    (int(line[0]) > 47 && int(line[0]) < 59)  { ss = line;	isName = true; }
+				else if (isName == true)  					 	  { nm = line;	isName = false; }
+				else										      { occ = line; }
 				count++;
 			}
 			if (count == 3)
@@ -195,7 +195,58 @@ void RWData::ReadInData(datastructure_std::Datastructure &datastructure)
  * 		to the other file. Then toggling the main file 
  * 
  */
-void RWData::SaveData()
+void RWData::SaveData(unordered_map<string, int> &ignoredEntry)
 {
-	cout << "RWData::SaveData needs to be implemented" << endl;
+	cout << "RWData::SaveData has started..." << endl;
+
+	string   line;
+	ifstream dataFileMain;		// The file with all the data and user modifications
+	ofstream dataFileNewMain;	// Where all the updated data will go
+	int  	 count = 0;
+	string   entry[3];
+
+	// Opening the main file as a read and the other as a write
+	if      (this->fileNumber == 1)	 { dataFileMain.open(db1FilePath); dataFileNewMain.open(db2FilePath); }
+	else if (this->fileNumber == 2)  { dataFileMain.open(db2FilePath); dataFileNewMain.open(db1FilePath); }
+	else							 cout << "Something went wrong in RWData::SaveData()..." << endl;
+
+	if (dataFileMain.is_open() && dataFileNewMain.is_open())
+	{
+		while (getline(dataFileMain, line))
+		{
+			if (count < 3)
+			{
+				entry[count] = line;
+				count++;
+			}
+			else if (ignoredEntry.count(entry[0]) > 0)		// element is to be ignored
+			{
+				// Decrementing the hashvalue and erasing its hash if it equals to zero
+				if (--ignoredEntry[entry[0]] == 0)  ignoredEntry.erase(entry[0]);
+				count = 0;
+			}
+			else
+			{
+				cout << "Adding to the file..." << endl;
+				dataFileNewMain << entry[0] << endl;
+				dataFileNewMain << entry[1] << endl;
+				dataFileNewMain << entry[2] << endl;
+				count = 0;
+			}
+		}
+		dataFileMain.close(); 
+		dataFileNewMain.close();
+	}
+	else  cout << "Unable to open file (RWData::SaveData())..." << endl;
+
+	// Delete contents on original main file	(MAYBE PLACE IN A NEW FUNCTION)
+	if      (this->fileNumber == 1)	 { dataFileNewMain.open(db1FilePath); }
+	else if (this->fileNumber == 2)  { dataFileNewMain.open(db2FilePath); }
+	else							 cout << "Something went wrong in RWData::SaveData()..." << endl;
+
+	if (dataFileNewMain.is_open())  dataFileNewMain << "/" << endl;
+
+	this->ToggleMainFile();
+
+	cout << "RWData::SaveData has finished..." << endl;
 }

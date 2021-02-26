@@ -7,7 +7,6 @@
 // ======================================================================
 
 #include "databasemanager.h"
-// #include "../rwdata/rwdata.h"
 #include <iostream>
 #include <string>
 #include <unordered_map>
@@ -46,7 +45,7 @@ DatabaseManager::DatabaseManager()
  */
 DatabaseManager::~DatabaseManager()
 {
-    cout << "DatabaseManager destructor..." << endl;
+    cout << "DatabaseManager destructor...\n" << endl;
 }
 
 
@@ -121,6 +120,10 @@ void DatabaseManager::RemoveEntry(string socialSecurity)
 void DatabaseManager::SaveData()
 {
     // this->rwdata.WriteData("3", "3", "3", false);
-    this->rwdata.SaveData();
+    for (int i = 0; i < 10; i++)
+    {
+        mapOfIgnoredEntires[to_string(i)] = 1;
+    }
+    this->rwdata.SaveData(mapOfIgnoredEntires);
 }
 

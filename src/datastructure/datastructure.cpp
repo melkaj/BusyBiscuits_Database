@@ -42,13 +42,14 @@ Datastructure::Datastructure()
  */
 Datastructure::~Datastructure()
 {
+    cout << "DataStructure deconstructor..." << endl;
     int count = 0;
     for (int i = 0; i < tableSize; i++)
     {
         count += DeleteSubTree(HashTable[i]);
     }
     cout << "Deleted " << count << " node(s)..." << endl;
-    cout << "======================================================================" << endl;
+    cout << "======================================================================\n" << endl;
 }
 
 

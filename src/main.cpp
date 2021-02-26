@@ -2,6 +2,7 @@
 #include "./datastructure/datastructure.h"
 #include "./databasemanager/databasemanager.h"
 #include "./rwdata/rwdata.h"
+#include <fstream>
 #include <iostream>
 #include <string>
 #include <unordered_map>
@@ -25,16 +26,44 @@ int main(int argc, char** argv)
 	// 	"Intern" };
 
 
-
 	/**
 	 * DATABASEMANAGER
 	 * 
 	 */
 	DatabaseManager dbm;
+	dbm.AddEntry("123120", "Jim Halpert", "Sports Manager");
+	dbm.SaveData();
 
 
 
+	/**
+	 * TESTING DOUBLE GETLINE
+	 */
 
+	// string line;
+	// int count = 0;
+	// ifstream tempfile("/home/mel/Desktop/BusyBiscuits_Database/src/open.txt");
+
+	// while(tempfile.is_open())
+	// {
+
+	// }
+
+	// if (tempfile.is_open())
+	// {
+	// 	while(getline(tempfile, line))
+	// 	{
+	// 		if (count<3)
+	// 		{
+	// 			while (getline(tempfile, line) and count<3)
+	// 			{
+	// 				cout << "line: " << line << endl;
+	// 				count++;
+	// 			}
+	// 		}
+	// 		else  cout << "outside line: " << line << endl; 
+	// 	}
+	// }
 
 
 	/**

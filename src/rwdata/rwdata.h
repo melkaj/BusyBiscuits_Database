@@ -7,8 +7,8 @@
 // ======================================================================
 
 #pragma once
-#include <iostream>
 #include <string>
+#include <unordered_map>
 
 using namespace std;
 
@@ -18,18 +18,18 @@ namespace rwdata_std
 	{
 	private:
 		int 		fileNumber;
-		string 		db1Filename, db2Filename;
+		string 		db1FilePath, db2FilePath;
 
 	public:
 		RWData						();
 		~RWData						();
-		string		Getdb1Filename  ();
-		string		Getdb2Filename  ();
+		string		Getdb1FilePath  ();
+		string		Getdb2FilePath  ();
 
 		void 		WriteData		(string socialSecurity, string name, string occupation, bool isOverwrite);
 		void 		ReadInData		(datastructure_std::Datastructure &datastructure);
 		void 		ToggleMainFile	();
 
-		void 		SaveData		();
+		void 		SaveData		(unordered_map<string, int> &ignoreEntry);
 	};
 }
