@@ -48,7 +48,7 @@ TEST_CASE("Testing the Datastructure class...")
         SECTION("Removing root node (but with only one child)...")
         {
             REQUIRE(ds.GetOccupation("120000") == "1");
-            ds.RemoveEntry("120000");
+            REQUIRE(ds.RemoveEntry("120000") == 100);
             REQUIRE(ds.GetOccupation("120000") == "Empty");
         }
 
@@ -57,54 +57,68 @@ TEST_CASE("Testing the Datastructure class...")
             // Adding a child to the left of the root
             ds.AddEntry("119996", "-1", "-1");
             REQUIRE(ds.GetOccupation("119996") == "-1");
-            ds.RemoveEntry("120000");
+            REQUIRE(ds.RemoveEntry("120000") == 100);
             REQUIRE(ds.GetOccupation("120000") == "Empty");
         }
         
         SECTION("Removing leaf node...")
         {
             REQUIRE(ds.GetOccupation("120015") == "16");
-            ds.RemoveEntry("120015");
+            REQUIRE(ds.RemoveEntry("120015") == 100);
             REQUIRE(ds.GetOccupation("120015") == "Empty");
         }
 
         SECTION("Removing parent node (node with one left child)...")
         {
             REQUIRE(ds.GetOccupation("121000") == "2");
-            ds.RemoveEntry("121000");
+            REQUIRE(ds.RemoveEntry("121000") == 100);
             REQUIRE(ds.GetOccupation("121000") == "Empty");
         }
 
         SECTION("Removing parent node (node with one right child)...")
         {
             REQUIRE(ds.GetOccupation("120004") == "5");
-            ds.RemoveEntry("120004");
+            REQUIRE(ds.RemoveEntry("120004") == 100);
             REQUIRE(ds.GetOccupation("120004") == "Empty");
         }
 
         SECTION("Removing node that does not exist...")
         {
-            REQUIRE(ds.GetOccupation("100000") == "Empty");
-            ds.RemoveEntry("100000");
-            REQUIRE(ds.GetOccupation("100000") == "Empty");
+            REQUIRE_THROWS_AS(ds.RemoveEntry("100000"), int);// == 102);
         }
     }
 
-    SECTION("Overwriting entries...")
+
+    SECTION("TESTING AddEntry method... ")
     {
-        REQUIRE(ds.GetOccupation("120000") == "1");
-        ds.AddEntry("120000", "Meldin", "Engineer");
-        REQUIRE(ds.GetOccupation("120000") == "Engineer");
-        ds.RemoveEntry("120000");
-        REQUIRE(ds.GetOccupation("120000") == "Empty");
+        SECTION("Adding a new entry...")
+        {
+            REQUIRE(ds.AddEntry("100000", "New Entry", "New Entry"));
+        }
+
+        SECTION("Trying to add an existing entry...")
+        {
+            REQUIRE_THROWS_AS(ds.AddEntry("121000", "OVERWRITE", "OVERWRITE"), int);
+        }
     }
 
-    SECTION("Overwriting entries PT2...")
+    SECTION("TESTING UpdateEntry method...")
     {
-        REQUIRE(ds.GetOccupation("120012") == "13");
-        ds.RemoveEntry("120012");
-        REQUIRE(ds.GetOccupation("120012") == "Empty");
-        ds.AddEntry("120012", "NewName", "NewOccupation");
-        REQUIRE(ds.GetOccupation("120012") == "NewOccupation");
+        SECTION("Updating exisiting entry...")
+        {
+            REQUIRE(ds.GetOccupation("120000") == "1");
+            REQUIRE(ds.UpdateEntry("120000", "Meldin", "Engineer") == 100);
+            REQUIRE(ds.GetOccupation("120000") == "Engineer");
+        }
+
+        SECTION("Updating entry that does not exist...")
+        {
+            ds.PrintDatabaseInOrder();
+            REQUIRE(ds.GetOccupation("100000") == "Empty");
+            REQUIRE_THROWS_AS(ds.UpdateEntry("100000", "UPDATED NAME", "UPDATED OCCU"), int);
+            REQUIRE(ds.GetOccupation("100000") == "Empty");
+            ds.PrintDatabaseInOrder();
+        }
     }
+
 }

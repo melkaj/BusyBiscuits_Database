@@ -36,10 +36,10 @@ namespace datastructure_std
         int             DeleteSubTree           (node* ptr);
 
         void            PrintDatabaseInOrder_P  (node* ptr);
-        void            AddEntryToTree          (string socialSecurity, string name, string occupation, node* root);
-        void            RemoveEntry_P           (string socialSecurity, node* parent);
-        void            RemoveMatch             (node* parent, node* match, bool left);
-        void            RemoveRootMatch         (node* &root);
+        int             AddEntryToTree          (string socialSecurity, string name, string occupation, node* root);
+        int             RemoveEntry_P           (string socialSecurity, node* parent);
+        int             RemoveMatch             (node* parent, node* match, bool left);
+        int             RemoveRootMatch         (node* &root);
 
         node*           FindSmallestNodePrivate (node* ptr);
         node*           GetTargetNode           (node* ptr, string socialSecurity);
@@ -54,8 +54,10 @@ namespace datastructure_std
         
         node*           CreateLeaf              (string socialSecurity, string name, string occupation);
         
-        void            AddEntry                (string socialSecurity, string name, string occupation);
-        void            RemoveEntry             (string socialSecurity);
+        int             AddEntry                (string socialSecurity, string name, string occupation);
+        int             UpdateEntry             (string socialSecurity, string name, string occupation);
+        int             RemoveEntry             (string socialSecurity);
+        
         void            PrintDatabaseInOrder    ();
 
         string          GetOccupation           (string socialSecurity);

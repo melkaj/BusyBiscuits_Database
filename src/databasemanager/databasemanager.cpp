@@ -80,7 +80,7 @@ void DatabaseManager::AddEntry(string socialSecurity, string name, string occupa
  */
 void DatabaseManager::UpdateEntry(string socialSecurity, string name, string occupation)
 {
-
+    cout << "DatabaseManager::UpdateEntry() is not implemented..." << endl;
 }
 
 
@@ -97,15 +97,21 @@ void DatabaseManager::UpdateEntry(string socialSecurity, string name, string occ
 void DatabaseManager::RemoveEntry(string socialSecurity)
 {
     // Remove desired entry from the database
-    this->database.RemoveEntry(socialSecurity);
+    if (this->database.RemoveEntry(socialSecurity) == 100)
+    {
+        // Set up removal from the data file
+        // Checking if socialSecurity is already in the unordered_map
+        //  If entry was not in the map, then insert it and initialize it to 1
+        //  If it was found, then increment its value by 1
+        unordered_map<string, int>::const_iterator found = this->mapOfIgnoredEntires.find(socialSecurity);
+        if (found == this->mapOfIgnoredEntires.end())   this->mapOfIgnoredEntires[socialSecurity] = 1;
+        else                                            this->mapOfIgnoredEntires[socialSecurity]++;
+    }
+    else
+    {
+        cout << "fksjrfn" << endl;
+    }
 
-    // Set up removal from the data file
-    // Checking if socialSecurity is already in the unordered_map
-    //  If entry was not in the map, then insert it and initialize it to 1
-    //  If it was found, then increment its value by 1
-    unordered_map<string, int>::const_iterator found = this->mapOfIgnoredEntires.find(socialSecurity);
-    if (found == this->mapOfIgnoredEntires.end())   this->mapOfIgnoredEntires[socialSecurity] = 1;
-    else                                            this->mapOfIgnoredEntires[socialSecurity]++;
 }
 
 

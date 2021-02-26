@@ -123,7 +123,7 @@ Datastructure::node* Datastructure::CreateLeaf(string socialSecurity, string nam
 
 /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * A:  Integer, String, String, Datastructure::node*
- * RT: Void
+ * RT: Integer
  * 
  * Adds a new entry to the binary tree that is attache to the index in the 
  *      table. This function is called when there was a collision in the 
@@ -131,31 +131,34 @@ Datastructure::node* Datastructure::CreateLeaf(string socialSecurity, string nam
  *      instead of the table itself. 
  * 
  */
-void Datastructure::AddEntryToTree(string socialSecurity, string name, string occupation, Datastructure::node* root)
+int Datastructure::AddEntryToTree(string socialSecurity, string name, string occupation, Datastructure::node* root)
 {  
     if (socialSecurity < root->socialSecurity)       // Less than
     {
-        if (root->left == NULL)   root->left = CreateLeaf(socialSecurity, name, occupation); 
-        else                      AddEntryToTree(socialSecurity, name, occupation, root->left);
+        if (root->left == NULL)   { root->left = CreateLeaf(socialSecurity, name, occupation); return 100; }
+        else                      return AddEntryToTree(socialSecurity, name, occupation, root->left);
     }
     else if (socialSecurity > root->socialSecurity)  // Greater than
     {
-        if (root->right == NULL)  root->right = CreateLeaf(socialSecurity, name, occupation); 
-        else                      AddEntryToTree(socialSecurity, name, occupation, root->right);
+        if (root->right == NULL)  { root->right = CreateLeaf(socialSecurity, name, occupation); return 100; }
+        else                      return AddEntryToTree(socialSecurity, name, occupation, root->right);
     }
-    else                                             // Equal so overwrite
+    else                                             // Equal
     {
-        root->socialSecurity = socialSecurity;
-        root->name =           name;
-        root->occupation =     occupation;
+        // root->socialSecurity = socialSecurity;
+        // root->name =           name;
+        // root->occupation =     occupation;
+        throw 101;
     }
+    cout << "SOCIAL SECURITY HEREEEEEEE " << socialSecurity << endl;
+    throw -100;
 }
 
 
 
 /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * A:  Integer, String, String
- * RT: Void
+ * RT: Integer
  * 
  * Adds a new entry into the datastructure. If there is no collision in the
  *      hashtable, then the entry is placed on the table itself. If there 
@@ -163,7 +166,7 @@ void Datastructure::AddEntryToTree(string socialSecurity, string name, string oc
  *      attached to the index in the table.
  * 
  */
-void Datastructure::AddEntry(string socialSecurity, string name, string occupation)
+int Datastructure::AddEntry(string socialSecurity, string name, string occupation)
 {
     int index = Hash(socialSecurity);
 
@@ -173,12 +176,39 @@ void Datastructure::AddEntry(string socialSecurity, string name, string occupati
         HashTable[index]->socialSecurity = socialSecurity;
         HashTable[index]->name = name;
         HashTable[index]->occupation = occupation;
+        return 100;
     }
     // Index in hashtable is not empty
     else
     {
-        AddEntryToTree(socialSecurity, name, occupation, HashTable[index]);
+        return AddEntryToTree(socialSecurity, name, occupation, HashTable[index]);
     }
+}
+
+
+
+/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * A:  Integer, String, String
+ * RT: Integer
+ *
+ * Looks for an existing entry and updates the entry 
+ * 
+ */
+
+int Datastructure::UpdateEntry(string socialSecurity, string name, string occupation)
+{
+    int index = Hash(socialSecurity);
+
+    Datastructure::node* foundNode = GetTargetNode(HashTable[index], socialSecurity);
+
+    if (foundNode->socialSecurity == socialSecurity)
+    {
+        foundNode->name = name;  foundNode->occupation = occupation;
+        return 100;
+    }
+    
+    throw 102;
+
 }
 
 
@@ -222,7 +252,7 @@ void Datastructure::PrintDatabaseInOrder_P(Datastructure::node* ptr)
     else                    cout << "\tleft: " << ptr->left;
 
     // Right node
-    if (ptr->right != NULL)  cout << "\tright: " << ptr->right->socialSecurity << endl;
+    if (ptr->right != NULL) cout << "\tright: " << ptr->right->socialSecurity << endl;
     else                    cout << "\tright: " << ptr->right << endl;
 
     cout << "\t______________________________________________________________" << endl;
@@ -233,7 +263,7 @@ void Datastructure::PrintDatabaseInOrder_P(Datastructure::node* ptr)
 
 /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * A:  Integer
- * RT: Void
+ * RT: Integer
  * 
  * Checks if the given socialSecurity is in the hashtable. If so, then
  *      call the helper function to remove the root of the tree and 
@@ -241,17 +271,17 @@ void Datastructure::PrintDatabaseInOrder_P(Datastructure::node* ptr)
  *      helper function to search through tree and remove it if possible
  * 
  */
-void Datastructure::RemoveEntry(string socialSecurity)
+int Datastructure::RemoveEntry(string socialSecurity)
 {
     int index = Hash(socialSecurity);
 
     if (HashTable[index]->socialSecurity == socialSecurity)
     {
-        RemoveRootMatch(HashTable[index]);
+        return RemoveRootMatch(HashTable[index]);
     }
     else   
     {
-        RemoveEntry_P(socialSecurity, HashTable[index]);
+        return RemoveEntry_P(socialSecurity, HashTable[index]);
     }
 }
 
@@ -259,50 +289,58 @@ void Datastructure::RemoveEntry(string socialSecurity)
 
 /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * A:  Integer, Datastructure::node*
- * RT: Void
+ * RT: Integer
  * 
  * Recursively traverses through the given binary tree to search for desired node.
  *      If found then call helper function to remove it and have it replaced
  *      if necessary. If not found, then console log that it was not found
  * 
  */
-void Datastructure::RemoveEntry_P(string socialSecurity, Datastructure::node* parent)
+int Datastructure::RemoveEntry_P(string socialSecurity, Datastructure::node* parent)
 {
     // socialSecurity is less than parent socialSecurity, 
     // and its looking at something to the left
     if (socialSecurity < parent->socialSecurity && parent->left != NULL)
     {
-        parent->left->socialSecurity == socialSecurity ?
-            RemoveMatch(parent, parent->left, true) :
-            RemoveEntry_P(socialSecurity, parent->left);
+        if (parent->left->socialSecurity == socialSecurity) return RemoveMatch(parent, parent->left, true);
+        else                                                return RemoveEntry_P(socialSecurity, parent->left);                 
+        // parent->left->socialSecurity == socialSecurity ?
+        //     RemoveMatch(parent, parent->left, true) :
+        //     RemoveEntry_P(socialSecurity, parent->left);
     }
     // socialSecurity is greater than parent socialSecurity, 
     // and its looking at something to the right
     else if (socialSecurity > parent->socialSecurity && parent->right != NULL)
     {
-        parent->right->socialSecurity == socialSecurity ?
-            RemoveMatch(parent, parent->right, false) :
-            RemoveEntry_P(socialSecurity, parent->right);
+        if (parent->right->socialSecurity == socialSecurity) return RemoveMatch(parent, parent->right, false);
+        else                                                 return RemoveEntry_P(socialSecurity, parent->right); 
+        // parent->right->socialSecurity == socialSecurity ?
+        //     RemoveMatch(parent, parent->right, false) :
+        //     RemoveEntry_P(socialSecurity, parent->right);
     }
     // No match in database
     else
     {
         cout << "Desired entry with social security of (" << socialSecurity 
             << ") was not found" << endl;
+        throw 102;
     }
+
+    return 100;
+
 }
 
 
 
 /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * A:  Datastrucure::node*, Datastrucure::node*, Bool
- * RT: Void
+ * RT: Integer
  * 
  * Removes the node and reconnects the tree accordingly based on specific 
  *      orientations parent-match relationship
  * 
  */
-void Datastructure::RemoveMatch(Datastructure::node* parent, Datastructure::node* match, bool left)
+int Datastructure::RemoveMatch(Datastructure::node* parent, Datastructure::node* match, bool left)
 {
     node* delptr;
     string matchSocial = match->socialSecurity;
@@ -365,18 +403,21 @@ void Datastructure::RemoveMatch(Datastructure::node* parent, Datastructure::node
         match->occupation = temp2;
         match->socialSecurity = temp3;
     }
+
+    return 100;
+
 }
 
 
  
 /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * A:  Datastructure::node*
- * RT: Void
+ * RT: Integer
  * 
  * Removes root of the binary tree
  * 
  */
-void Datastructure::RemoveRootMatch(Datastructure::node* &root)
+int Datastructure::RemoveRootMatch(Datastructure::node* &root)
 {
     node* delptr = root;
     string rootSocial = root->socialSecurity;
@@ -398,8 +439,6 @@ void Datastructure::RemoveRootMatch(Datastructure::node* &root)
         cout << "Root node with Social Security " << rootSocial
             << " has been deleted\n"
             << "New root node has Social Security " << root->socialSecurity << endl;
-        cout << "Second pass\t" << root->name << "\t" << root->occupation << endl;
-        cout << "Third pass\t" << delptr->name << "\t" << delptr->occupation << endl;
     }
     // One Child (only has LEFT child)
     else if (root->left != NULL && root->right == NULL)
@@ -432,6 +471,9 @@ void Datastructure::RemoveRootMatch(Datastructure::node* &root)
         cout << "The root node with Social Security " << rootSocial
             << " was overwritten with Social Security " << root->socialSecurity << endl;
     }
+
+    return 100;
+
 }
 
 
@@ -464,10 +506,10 @@ Datastructure::node* Datastructure::FindSmallestNodePrivate(Datastructure::node*
  */
 Datastructure::node* Datastructure::GetTargetNode(Datastructure::node* ptr, string socialSecurity)
 {
-    if (ptr->socialSecurity == socialSecurity)                            return ptr;
+    if      (ptr->socialSecurity == socialSecurity)                       return ptr;
     else if (ptr->socialSecurity > socialSecurity && ptr->left != NULL)   return GetTargetNode(ptr->left, socialSecurity);
     else if (ptr->socialSecurity < socialSecurity && ptr->right != NULL)  return GetTargetNode(ptr->right, socialSecurity);
-    return CreateLeaf("100000", "Empty", "Empty");
+    return  CreateLeaf("-100000", "Empty", "Empty");
 }
 
 
