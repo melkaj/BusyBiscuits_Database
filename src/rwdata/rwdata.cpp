@@ -212,10 +212,11 @@ void RWData::SaveData(unordered_map<string, int> &ignoredEntry)
 
 	if (dataFileMain.is_open() && dataFileNewMain.is_open())
 	{
-		while (getline(dataFileMain, line))
+		while (!dataFileMain.eof())
 		{
 			if (count < 3)
 			{
+				getline(dataFileMain, line);
 				entry[count] = line;
 				count++;
 			}
@@ -227,7 +228,6 @@ void RWData::SaveData(unordered_map<string, int> &ignoredEntry)
 			}
 			else
 			{
-				cout << "Adding to the file..." << endl;
 				dataFileNewMain << entry[0] << endl;
 				dataFileNewMain << entry[1] << endl;
 				dataFileNewMain << entry[2] << endl;
@@ -248,5 +248,5 @@ void RWData::SaveData(unordered_map<string, int> &ignoredEntry)
 
 	this->ToggleMainFile();
 
-	cout << "RWData::SaveData has finished..." << endl;
+	cout << "RWData::SaveData has finished...\n" << endl;
 }

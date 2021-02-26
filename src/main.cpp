@@ -31,7 +31,7 @@ int main(int argc, char** argv)
 	 * 
 	 */
 	DatabaseManager dbm;
-	dbm.AddEntry("123120", "Jim Halpert", "Sports Manager");
+	dbm.RemoveEntry("123120");
 	dbm.SaveData();
 
 
@@ -44,24 +44,23 @@ int main(int argc, char** argv)
 	// int count = 0;
 	// ifstream tempfile("/home/mel/Desktop/BusyBiscuits_Database/src/open.txt");
 
-	// while(tempfile.is_open())
-	// {
-
-	// }
-
 	// if (tempfile.is_open())
 	// {
-	// 	while(getline(tempfile, line))
+	// 	cout << "opened..." << endl;
+	// 	while(!tempfile.eof())
 	// 	{
-	// 		if (count<3)
+	// 		if (count<110)
 	// 		{
-	// 			while (getline(tempfile, line) and count<3)
-	// 			{
-	// 				cout << "line: " << line << endl;
-	// 				count++;
-	// 			}
+	// 			getline(tempfile, line);
+	// 			cout << "line: " << line << endl;
+	// 			count++;
+	// 			// while (getline(tempfile, line) and count<3)
+	// 			// {
+	// 			// 	cout << "line: " << line << endl;
+	// 			// 	count++;
+	// 			// }
 	// 		}
-	// 		else  cout << "outside line: " << line << endl; 
+	// 		else  break;
 	// 	}
 	// }
 

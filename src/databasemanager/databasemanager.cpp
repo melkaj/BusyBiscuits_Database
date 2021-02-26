@@ -125,5 +125,6 @@ void DatabaseManager::SaveData()
         mapOfIgnoredEntires[to_string(i)] = 1;
     }
     this->rwdata.SaveData(mapOfIgnoredEntires);
+    mapOfIgnoredEntires.clear();
 }
 
