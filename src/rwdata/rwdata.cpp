@@ -184,3 +184,18 @@ void RWData::ReadInData(datastructure_std::Datastructure &datastructure)
 
 	cout << "Data has been unloaded to the datastructure..." << endl;
 }
+
+
+
+/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * A:  None
+ * RT: Void
+ * 
+ * Applys the modifications on the current main data file and putting it
+ * 		to the other file. Then toggling the main file 
+ * 
+ */
+void RWData::SaveData()
+{
+	cout << "RWData::SaveData needs to be implemented" << endl;
+}

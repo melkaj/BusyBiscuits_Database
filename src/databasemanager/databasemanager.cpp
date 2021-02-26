@@ -7,6 +7,7 @@
 // ======================================================================
 
 #include "databasemanager.h"
+// #include "../rwdata/rwdata.h"
 #include <iostream>
 #include <string>
 #include <unordered_map>
@@ -119,6 +120,7 @@ void DatabaseManager::RemoveEntry(string socialSecurity)
  */
 void DatabaseManager::SaveData()
 {
+    // this->rwdata.WriteData("3", "3", "3", false);
     this->rwdata.SaveData();
 }
 

@@ -24,9 +24,9 @@ BusyBiscuits_Database
 ```
  - If you want to run the main program, execute the following command
 ```
-./ExecuteMainMakeFiles.sh
+./MainMakeFilesExecute.sh
 ```
  - If you want to run the tests, execute the following command
 ```
-./ExecuteTestMakeFiles.sh
+./TestMakeFilesExecute.sh
 ```

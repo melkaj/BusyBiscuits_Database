@@ -21,4 +21,4 @@ add_subdirectory(test)
 #   executable 'main'
 # add_executable(main ${source_files})
 add_executable(main src/main.cpp)
-target_link_libraries(main PRIVATE ds)
+target_link_libraries(main PRIVATE database)

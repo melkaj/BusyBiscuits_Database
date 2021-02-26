@@ -20,8 +20,6 @@ namespace rwdata_std
 		int 		fileNumber;
 		string 		db1Filename, db2Filename;
 
-		void 		SaveData		();
-
 	public:
 		RWData						();
 		~RWData						();
@@ -32,5 +30,6 @@ namespace rwdata_std
 		void 		ReadInData		(datastructure_std::Datastructure &datastructure);
 		void 		ToggleMainFile	();
 
+		void 		SaveData		();
 	};
 }
