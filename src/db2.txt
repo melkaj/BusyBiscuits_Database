@@ -1,1 +1,24 @@
-/
+123124
+Michael Scott
+Branch Manager
+123123
+Dwight Schrute
+Paper Salesman
+123122
+Pam Beasley
+Secretary
+123125
+Oscar Martinez
+Accountant
+123126
+Holly Scott
+HR
+123128
+Darryl Philbin
+Foreman
+123132
+Michael Jordan
+GOAT
+123127
+Fire-d Guy
+Unemployed

@@ -144,13 +144,8 @@ int Datastructure::AddEntryToTree(string socialSecurity, string name, string occ
         else                      return AddEntryToTree(socialSecurity, name, occupation, root->right);
     }
     else                                             // Equal
-    {
-        // root->socialSecurity = socialSecurity;
-        // root->name =           name;
-        // root->occupation =     occupation;
         throw 101;
-    }
-    cout << "SOCIAL SECURITY HEREEEEEEE " << socialSecurity << endl;
+
     throw -100;
 }
 
@@ -304,9 +299,6 @@ int Datastructure::RemoveEntry_P(string socialSecurity, Datastructure::node* par
     {
         if (parent->left->socialSecurity == socialSecurity) return RemoveMatch(parent, parent->left, true);
         else                                                return RemoveEntry_P(socialSecurity, parent->left);                 
-        // parent->left->socialSecurity == socialSecurity ?
-        //     RemoveMatch(parent, parent->left, true) :
-        //     RemoveEntry_P(socialSecurity, parent->left);
     }
     // socialSecurity is greater than parent socialSecurity, 
     // and its looking at something to the right
@@ -314,17 +306,10 @@ int Datastructure::RemoveEntry_P(string socialSecurity, Datastructure::node* par
     {
         if (parent->right->socialSecurity == socialSecurity) return RemoveMatch(parent, parent->right, false);
         else                                                 return RemoveEntry_P(socialSecurity, parent->right); 
-        // parent->right->socialSecurity == socialSecurity ?
-        //     RemoveMatch(parent, parent->right, false) :
-        //     RemoveEntry_P(socialSecurity, parent->right);
     }
     // No match in database
-    else
-    {
-        cout << "Desired entry with social security of (" << socialSecurity 
-            << ") was not found" << endl;
+    else  
         throw 102;
-    }
 
     return 100;
 

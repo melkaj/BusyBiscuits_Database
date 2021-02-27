@@ -31,7 +31,12 @@ int main(int argc, char** argv)
 	 * 
 	 */
 	DatabaseManager dbm;
+	dbm.AddEntry("123132", "Michael Jordan", "GOAT");
 	dbm.RemoveEntry("123120");
+	dbm.UpdateEntry("123127", "Fire-d Guy", "Unemployed");
+	dbm.RemoveEntry("123129");
+	dbm.UpdateEntry("120000", "Nothing Here", "Nothing Here");
+	dbm.AddEntry("123126", "Jan", "Candle Maker");
 	dbm.SaveData();
 
 

@@ -61,8 +61,27 @@ void DatabaseManager::AddEntry(string socialSecurity, string name, string occupa
 {
     // First we add the entry to the datastructure and then we append
     //      the entry to the data file
-    this->database.AddEntry(socialSecurity, name, occupation);
-    this->rwdata.WriteData(socialSecurity, name, occupation, false);
+    try
+    {
+        this->database.AddEntry(socialSecurity, name, occupation);
+        this->rwdata.WriteData(socialSecurity, name, occupation, false);
+    }
+    catch(int e)
+    {
+        switch (e)
+        {
+        case 101:  cout << "Entry with social security (" << socialSecurity << ") already exists. You can update the entry if youd like" << endl; 
+            break;
+        
+        default:   cout << "Something went wrong in DatabaseManager::UpdateEntry" << endl; 
+            break;
+        }
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    
 }
 
 
@@ -80,7 +99,32 @@ void DatabaseManager::AddEntry(string socialSecurity, string name, string occupa
  */
 void DatabaseManager::UpdateEntry(string socialSecurity, string name, string occupation)
 {
-    cout << "DatabaseManager::UpdateEntry() is not implemented..." << endl;
+    try
+    {
+        this->database.UpdateEntry(socialSecurity, name, occupation);
+        this->rwdata.WriteData    (socialSecurity, name, occupation, false);
+        
+        // Setting up removal of original entry from the file
+        unordered_map<string, int>::const_iterator found = this->mapOfIgnoredEntires.find(socialSecurity);
+        if (found == this->mapOfIgnoredEntires.end())   this->mapOfIgnoredEntires[socialSecurity] = 1;
+        else                                            this->mapOfIgnoredEntires[socialSecurity]++;
+
+    }
+    catch(int e)
+    {
+        switch (e)
+        {
+        case 102:  cout << "Entry with social security (" << socialSecurity << ") was not found" << endl; 
+            break;
+        
+        default:   cout << "Something went wrong in DatabaseManager::UpdateEntry" << endl; 
+            break;
+        }
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
 }
 
 
@@ -96,21 +140,32 @@ void DatabaseManager::UpdateEntry(string socialSecurity, string name, string occ
  */
 void DatabaseManager::RemoveEntry(string socialSecurity)
 {
-    // Remove desired entry from the database
-    if (this->database.RemoveEntry(socialSecurity) == 100)
+    try 
     {
-        // Set up removal from the data file
-        // Checking if socialSecurity is already in the unordered_map
-        //  If entry was not in the map, then insert it and initialize it to 1
-        //  If it was found, then increment its value by 1
+        // Removing desired entry from the datastructure
+        this->database.RemoveEntry(socialSecurity);
+
+        // Setting up removal from the file
         unordered_map<string, int>::const_iterator found = this->mapOfIgnoredEntires.find(socialSecurity);
         if (found == this->mapOfIgnoredEntires.end())   this->mapOfIgnoredEntires[socialSecurity] = 1;
         else                                            this->mapOfIgnoredEntires[socialSecurity]++;
     }
-    else
+    catch (int e)
     {
-        cout << "fksjrfn" << endl;
+        switch (e)
+        {
+        case 102:  cout << "Entry with social security (" << socialSecurity << ") was not found" << endl; 
+            break;
+        
+        default:   cout << "Something went wrong in DatabaseManager::RemoveEntry" << endl; 
+            break;
+        }
     }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << endl;
+    }
+
 
 }
 
@@ -126,10 +181,11 @@ void DatabaseManager::RemoveEntry(string socialSecurity)
 void DatabaseManager::SaveData()
 {
     // this->rwdata.WriteData("3", "3", "3", false);
-    for (int i = 0; i < 10; i++)
-    {
-        mapOfIgnoredEntires[to_string(i)] = 1;
-    }
+    // for (int i = 0; i < 10; i++)
+    // {
+    //     mapOfIgnoredEntires[to_string(i)] = 1;
+    // }
+
     this->rwdata.SaveData(mapOfIgnoredEntires);
     mapOfIgnoredEntires.clear();
 }
