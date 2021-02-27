@@ -144,9 +144,9 @@ int Datastructure::AddEntryToTree(string socialSecurity, string name, string occ
         else                      return AddEntryToTree(socialSecurity, name, occupation, root->right);
     }
     else                                             // Equal
-        throw 101;
+        return 101;
 
-    throw -100;
+    return -100;
 }
 
 
@@ -202,7 +202,7 @@ int Datastructure::UpdateEntry(string socialSecurity, string name, string occupa
         return 100;
     }
     
-    throw 102;
+    return 102;
 
 }
 
@@ -309,7 +309,7 @@ int Datastructure::RemoveEntry_P(string socialSecurity, Datastructure::node* par
     }
     // No match in database
     else  
-        throw 102;
+        return 102;
 
     return 100;
 

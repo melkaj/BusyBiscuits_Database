@@ -10,8 +10,6 @@
 #include <string>
 #include <unordered_map>
 
-using namespace std;
-
 namespace rwdata_std
 {
 	class RWData

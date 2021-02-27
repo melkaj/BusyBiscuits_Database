@@ -114,6 +114,7 @@ void RWData::WriteData(string socialSecurity, string name, string occupation, bo
 	string   db1 = db1FilePath;
 	string   db2 = db2FilePath;
 
+	// Loding the main file that will be written to
 	if 		(this->fileNumber == 1 && isOverwrite == false)	 datafile.open(db1, ios::app);
 	else if (this->fileNumber == 2 && isOverwrite == false)	 datafile.open(db2, ios::app);
 	else if (this->fileNumber == 1 && isOverwrite == true)	 datafile.open(db1, ios::out);

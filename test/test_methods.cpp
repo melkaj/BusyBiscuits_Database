@@ -84,7 +84,7 @@ TEST_CASE("Testing the Datastructure class...")
 
         SECTION("Removing node that does not exist...")
         {
-            REQUIRE_THROWS_AS(ds.RemoveEntry("100000"), int);// == 102);
+            REQUIRE(ds.RemoveEntry("100000") == 102);
         }
     }
 
@@ -98,7 +98,7 @@ TEST_CASE("Testing the Datastructure class...")
 
         SECTION("Trying to add an existing entry...")
         {
-            REQUIRE_THROWS_AS(ds.AddEntry("121000", "OVERWRITE", "OVERWRITE"), int);
+            REQUIRE(ds.AddEntry("121000", "OVERWRITE", "OVERWRITE") == 101);
         }
     }
 
@@ -115,7 +115,7 @@ TEST_CASE("Testing the Datastructure class...")
         {
             ds.PrintDatabaseInOrder();
             REQUIRE(ds.GetOccupation("100000") == "Empty");
-            REQUIRE_THROWS_AS(ds.UpdateEntry("100000", "UPDATED NAME", "UPDATED OCCU"), int);
+            REQUIRE(ds.UpdateEntry("100000", "UPDATED NAME", "UPDATED OCCU") == 102);
             REQUIRE(ds.GetOccupation("100000") == "Empty");
             ds.PrintDatabaseInOrder();
         }

@@ -1,4 +1,5 @@
 
+#include "./cli/cli.h"
 #include "./datastructure/datastructure.h"
 #include "./databasemanager/databasemanager.h"
 #include "./rwdata/rwdata.h"
@@ -7,6 +8,7 @@
 #include <string>
 #include <unordered_map>
 
+using namespace cli_std;
 using namespace databasemanager_std;
 using namespace datastructure_std;
 using namespace rwdata_std;
@@ -24,6 +26,14 @@ int main(int argc, char** argv)
 	// 	"Cleaning", "Bank", "Consultant", "Waiter", "LS Sales", "TV Sales",
 	// 	"Paper Sales", "Fighter", "Secretary", "Driver", "Racer",
 	// 	"Intern" };
+
+
+	/**
+	 * CLI
+	 *  
+	 */
+	// CLI cli;
+	// cli.MainLoop();
 
 
 	/**

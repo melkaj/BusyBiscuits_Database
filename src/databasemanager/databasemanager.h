@@ -12,8 +12,6 @@
 #include <string>
 #include <unordered_map>
 
-using namespace std;
-
 namespace databasemanager_std
 {
     class DatabaseManager
@@ -28,9 +26,10 @@ namespace databasemanager_std
         public:
             DatabaseManager();
             ~DatabaseManager();
-            void                                AddEntry        (string socialSecurity, string name, string occupation);
-            void                                UpdateEntry     (string socialSecurity, string name, string occupation);
-            void                                RemoveEntry     (string socialSecurity);
+            int                                 AddEntry        (string socialSecurity, string name, string occupation);
+            int                                 UpdateEntry     (string socialSecurity, string name, string occupation);
+            int                                 RemoveEntry     (string socialSecurity);
             void                                SaveData        ();
+            void                                PrintDataInOrder();
     };
 }
