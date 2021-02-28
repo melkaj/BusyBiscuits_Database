@@ -61,6 +61,7 @@ namespace datastructure_std
         void            PrintDatabaseInOrder    ();
 
         string          GetOccupation           (string socialSecurity);
+        string*         GetEntry                (string socialSecurity);
     };
 }
 

@@ -31,5 +31,8 @@ namespace databasemanager_std
             int                                 RemoveEntry     (string socialSecurity);
             void                                SaveData        ();
             void                                PrintDataInOrder();
+            void                                ExecuteCrudOper (string command, string socialSecurity, string name, string occupation);
+            void                                ExecuteCrudOper (string command, string socialSecurity);
+            void                                ParseInput      (string command);
     };
 }

@@ -42,8 +42,10 @@ RWData::RWData()
 		
 		cout << "line: " << line << endl;					// delete later
 
-		if (line == "/")	this->fileNumber = 2;
-		else				this->fileNumber = 1;
+		if (line == "/")	this->fileNumber = 1;
+		else				this->fileNumber = 0;
+
+		datafile.close();
 	}
 	else  cout << "Unable to open file..." << endl;
 
@@ -92,7 +94,8 @@ string RWData::Getdb2FilePath()  { return db2FilePath; }
  */
 void RWData::ToggleMainFile()
 {
-	this->fileNumber += 1 % 2;
+	this->fileNumber = (this->fileNumber + 1) % 2;
+	cout << "this->fileNumber: " << this->fileNumber << endl;
 }
 
 
@@ -115,10 +118,10 @@ void RWData::WriteData(string socialSecurity, string name, string occupation, bo
 	string   db2 = db2FilePath;
 
 	// Loding the main file that will be written to
-	if 		(this->fileNumber == 1 && isOverwrite == false)	 datafile.open(db1, ios::app);
-	else if (this->fileNumber == 2 && isOverwrite == false)	 datafile.open(db2, ios::app);
-	else if (this->fileNumber == 1 && isOverwrite == true)	 datafile.open(db1, ios::out);
-	else if (this->fileNumber == 2 && isOverwrite == true)	 datafile.open(db2, ios::out);
+	if 		(this->fileNumber == 0 && isOverwrite == false)	 datafile.open(db1, ios::app);
+	else if (this->fileNumber == 1 && isOverwrite == false)	 datafile.open(db2, ios::app);
+	else if (this->fileNumber == 0 && isOverwrite == true)	 datafile.open(db1, ios::out);
+	else if (this->fileNumber == 1 && isOverwrite == true)	 datafile.open(db2, ios::out);
 	else	cout << "Something went wrong in RWData::WriteData..." << endl;
 
 	if (datafile.is_open())
@@ -146,8 +149,8 @@ void RWData::ReadInData(datastructure_std::Datastructure &datastructure)
 	ifstream datafile;
 
 	// Opening the 'main' storage file
-	if      (this->fileNumber == 1)	 datafile.open(db1FilePath);
-	else if (this->fileNumber == 2)  datafile.open(db2FilePath);
+	if      (this->fileNumber == 0)	 datafile.open(db1FilePath);
+	else if (this->fileNumber == 1)  datafile.open(db2FilePath);
 	else							 cout << "Something went wrong in RWData::ReadInData(datastructure)..." << endl;
 
 	if (datafile.is_open())
@@ -207,8 +210,8 @@ void RWData::SaveData(unordered_map<string, int> &ignoredEntry)
 	string   entry[3];
 
 	// Opening the main file as a read and the other as a write
-	if      (this->fileNumber == 1)	 { dataFileMain.open(db1FilePath); dataFileNewMain.open(db2FilePath); }
-	else if (this->fileNumber == 2)  { dataFileMain.open(db2FilePath); dataFileNewMain.open(db1FilePath); }
+	if      (this->fileNumber == 0)	 { dataFileMain.open(db1FilePath); dataFileNewMain.open(db2FilePath); }
+	else if (this->fileNumber == 1)  { dataFileMain.open(db2FilePath); dataFileNewMain.open(db1FilePath); }
 	else							 cout << "Something went wrong in RWData::SaveData()..." << endl;
 
 	if (dataFileMain.is_open() && dataFileNewMain.is_open())
@@ -241,11 +244,11 @@ void RWData::SaveData(unordered_map<string, int> &ignoredEntry)
 	else  cout << "Unable to open file (RWData::SaveData())..." << endl;
 
 	// Delete contents on original main file	(MAYBE PLACE IN A NEW FUNCTION)
-	if      (this->fileNumber == 1)	 { dataFileNewMain.open(db1FilePath); }
-	else if (this->fileNumber == 2)  { dataFileNewMain.open(db2FilePath); }
+	if      (this->fileNumber == 0)	 { dataFileNewMain.open(db1FilePath); }
+	else if (this->fileNumber == 1)  { dataFileNewMain.open(db2FilePath); }
 	else							 cout << "Something went wrong in RWData::SaveData()..." << endl;
 
-	if (dataFileNewMain.is_open())  dataFileNewMain << "/" << endl;
+	if (dataFileNewMain.is_open())  { dataFileNewMain << "/" << endl;  dataFileNewMain.close(); }
 
 	this->ToggleMainFile();
 

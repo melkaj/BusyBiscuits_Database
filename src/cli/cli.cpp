@@ -52,22 +52,46 @@ CLI::~CLI()
  */
 void CLI::MainLoop()
 {
-    char command;
+    string command;
 
-    while (command != 'q')
+    while (command != "quit")
     {
         cout << "Please enter what you would like to do: \n\t" << endl;
-        cin >> command;
+        getline(cin, command);
 
-        switch (command)
+        if (command == "remove" || command == "find")
         {
-        case 'p':
-            this->databasemanager.PrintDataInOrder();  break;
-        
-        default:
-            cout << "Command (" << command << ") was not valid. Try again..." << endl;
-            break;
+            string socialSecurity;
+            cout << "Enter social security: ";
+            getline(cin, socialSecurity);
+
+            this->databasemanager.ExecuteCrudOper(command, socialSecurity);
+        }
+        else if (command == "add" || command == "update")
+        {
+            string socialSecurity, name, occupation;
+            cout << "Enter social security: ";
+            getline(cin, socialSecurity);
+
+            cout << "Enter name: ";
+            getline(cin, name);
+
+            cout << "Enter occupation: ";
+            getline(cin, occupation);
+
+            this->databasemanager.ExecuteCrudOper(command, socialSecurity, name, occupation);
+        }
+        else if (command == "print") 
+        {
+            this->databasemanager.PrintDataInOrder();
+        }
+        else if (command == "save")
+        {
+            this->databasemanager.SaveData();
+        }
+        else 
+        {
+            cout << "Command entered was invalid. Retry" << endl;
         }
     }
-
 }

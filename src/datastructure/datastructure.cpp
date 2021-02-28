@@ -514,3 +514,25 @@ string Datastructure::GetOccupation(string socialSecurity)
 
     return foundNode->occupation;
 }
+
+
+
+/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * A:  String
+ * RT: String Pointer
+ * 
+ * Returns a pointer to a string array that will hold the data of the array
+ * 
+ */
+string* Datastructure::GetEntry(string socialSecurity)
+{
+    int index = Hash(socialSecurity);
+
+    Datastructure::node* foundNode = GetTargetNode(HashTable[index], socialSecurity);
+
+    string* entryData = new string[3] { foundNode->socialSecurity, foundNode->name, foundNode->occupation };
+
+    // string entryData[3] = { foundNode->socialSecurity, foundNode->name, foundNode->occupation };
+
+    return entryData;
+}

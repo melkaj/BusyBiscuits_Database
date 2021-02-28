@@ -237,3 +237,77 @@ void DatabaseManager::PrintDataInOrder()
 
 
 
+/**
+ * 
+ * 
+ */
+void DatabaseManager::ExecuteCrudOper(string command, string socialSecurity, string name, string occupation)
+{
+    if (command == "add")
+    {
+        int response = AddEntry(socialSecurity, name, occupation);
+        if      (response == 100)  cout << "Entry was entered in the database" << endl;
+        else if (response == 101)  cout << "Database already has an entry with social security (" << socialSecurity << ")" << endl;
+        else                       cout << "Something went wrong" << endl;
+    }
+    else if (command == "update")
+    {
+        int response = UpdateEntry(socialSecurity, name, occupation);
+        if      (response == 100)  cout << "Entry with social security (" << socialSecurity << ") was updated" << endl;
+        else if (response == 102)  cout << "Entry with social security (" << socialSecurity << ") does not exist" << endl;
+        else                       cout << "Something went wrong" << endl;
+    }
+    else                           cout << "Something went wrong" << endl; 
+}
+
+
+
+/**
+ * 
+ * 
+ */
+void DatabaseManager::ExecuteCrudOper(string command, string socialSecurity)
+{
+    if (command == "remove")    
+    {
+        int response = RemoveEntry(socialSecurity);
+        if      (response == 100)  cout << "Entry with social security (" << socialSecurity << ") was removed" << endl;
+        else if (response == 102)  cout << "Entry with social security (" << socialSecurity << ") does not exist" << endl;
+        else                       cout << "Something went wrong" << endl;
+    }
+    else if (command == "find") 
+    {
+        string* response = this->database.GetEntry(socialSecurity);
+
+        if (*(response) == "000000")
+        {
+            cout << "Entry with social security (" << socialSecurity << ") does not exist" << endl;
+        }
+        else
+        {
+            cout << "\tName: " << *(response + 1) << endl;
+            cout << "\tSS: " << *(response) << endl;
+            cout << "\tOccupation: " << *(response + 2) << endl;
+            cout << "\t______________________________________________________________\n" << endl;
+        }
+    }
+    else  cout << "Something went wrong" << endl;
+}
+
+
+
+
+/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * A:  String, String, String, String
+ * RT: Void
+ * 
+ * Performs the necessary function calls based on the given command
+ * 
+ */
+void DatabaseManager::ParseInput(string command)
+{
+
+}
+
+
+

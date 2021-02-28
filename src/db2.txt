@@ -4,15 +4,9 @@ Branch Manager
 123123
 Dwight Schrute
 Paper Salesman
-123122
-Pam Beasley
-Secretary
 123125
 Oscar Martinez
 Accountant
-123126
-Holly Scott
-HR
 123128
 Darryl Philbin
 Foreman
@@ -22,3 +16,9 @@ GOAT
 123127
 Fire-d Guy
 Unemployed
+123126
+Jan
+Candle Maker
+123456
+Khabib Nurmagamaedov
+WelterWeight Champion
