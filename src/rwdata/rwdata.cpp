@@ -27,8 +27,6 @@ using namespace std;
  */
 RWData::RWData()
 {
-	cout << "Hello from the RWData constructor" << endl;
-
 	// Initializing filenames
 	db1FilePath = "/home/mel/Desktop/BusyBiscuits_Database/src/db1.txt";
 	db2FilePath = "/home/mel/Desktop/BusyBiscuits_Database/src/db2.txt";
@@ -40,16 +38,12 @@ RWData::RWData()
 	{
 		getline(datafile, line);
 		
-		cout << "line: " << line << endl;					// delete later
-
 		if (line == "/")	this->fileNumber = 1;
 		else				this->fileNumber = 0;
 
 		datafile.close();
 	}
 	else  cout << "Unable to open file..." << endl;
-
-	cout << "filenumber: " << this->fileNumber << endl;		// delete later
 }
 
 
@@ -177,7 +171,6 @@ void RWData::ReadInData(datastructure_std::Datastructure &datastructure)
 			}
 			if (count == 3)
 			{
-				cout << ss << '\t' << nm << '\t' << occ << endl;
 				datastructure.AddEntry(ss, nm, occ);
 				count = 0;
 			}

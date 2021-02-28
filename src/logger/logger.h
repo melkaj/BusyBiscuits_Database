@@ -10,17 +10,19 @@
 #include <fstream>
 #include <string>
 
+using namespace std;
+
 namespace logger_std
 {
     class Logger
     {
         private:
-            std::ofstream log_file;
-            std::string   log_file_path;
+            ofstream log_file;
+            string   log_file_path;
 
         public:
             Logger();
-            ~Logger();
+            void Log(string message);
 
     };
 }

@@ -8,8 +8,8 @@
 
 #include "databasemanager.h"
 #include <iostream>
-#include <string>
-#include <unordered_map>
+// #include <string>
+// #include <unordered_map>
 
 using namespace databasemanager_std;
 using namespace std;
@@ -25,13 +25,10 @@ using namespace std;
  */
 DatabaseManager::DatabaseManager()
 {
-    cout << "DatabaseManager constructor..." << endl;
-
     // Unloading file with data to the datastructure
     this->rwdata.ReadInData(this->database);
 
-    this->database.PrintDatabaseInOrder();
-
+    // this->database.PrintDatabaseInOrder();
 }
 
 
@@ -63,31 +60,7 @@ int DatabaseManager::AddEntry(string socialSecurity, string name, string occupat
 
     if (response == 100)  this->rwdata.WriteData(socialSecurity, name, occupation, false);
 
-    return response;
-
-
-    // First we add the entry to the datastructure and then we append
-    //      the entry to the data file
-    // try
-    // {
-    //     this->database.AddEntry(socialSecurity, name, occupation);
-    // }
-    // catch(int e)
-    // {
-    //     switch (e)
-    //     {
-    //     case 101:  cout << "Entry with social security (" << socialSecurity << ") already exists. You can update the entry if youd like" << endl; 
-    //         break;
-        
-    //     default:   cout << "Something went wrong in DatabaseManager::UpdateEntry" << endl; 
-    //         break;
-    //     }
-    // }
-    // catch(const std::exception& e)
-    // {
-    //     std::cerr << e.what() << '\n';
-    // }
-    
+    return response;    
 }
 
 
@@ -112,36 +85,8 @@ int DatabaseManager::UpdateEntry(string socialSecurity, string name, string occu
         if (found == this->mapOfIgnoredEntires.end())      this->mapOfIgnoredEntires[socialSecurity] = 1;
         else                                               this->mapOfIgnoredEntires[socialSecurity]++;
     }
-
+        
     return response;
-    
-
-    // try
-    // {
-    //     this->database.UpdateEntry(socialSecurity, name, occupation);
-    //     this->rwdata.WriteData    (socialSecurity, name, occupation, false);
-        
-    //     // Setting up removal of original entry from the file
-    //     unordered_map<string, int>::const_iterator found = this->mapOfIgnoredEntires.find(socialSecurity);
-    //     if (found == this->mapOfIgnoredEntires.end())   this->mapOfIgnoredEntires[socialSecurity] = 1;
-    //     else                                            this->mapOfIgnoredEntires[socialSecurity]++;
-
-    // }
-    // catch(int e)
-    // {
-    //     switch (e)
-    //     {
-    //     case 102:  cout << "Entry with social security (" << socialSecurity << ") was not found" << endl; 
-    //         break;
-        
-    //     default:   cout << "Something went wrong in DatabaseManager::UpdateEntry" << endl; 
-    //         break;
-    //     }
-    // }
-    // catch(const std::exception& e)
-    // {
-    //     std::cerr << e.what() << '\n';
-    // }
 }
 
 
@@ -169,35 +114,6 @@ int DatabaseManager::RemoveEntry(string socialSecurity)
     }
 
     return response;
-
-
-    // try 
-    // {
-    //     // Removing desired entry from the datastructure
-    //     this->database.RemoveEntry(socialSecurity);
-
-    //     // Setting up removal from the file
-    //     unordered_map<string, int>::const_iterator found = this->mapOfIgnoredEntires.find(socialSecurity);
-    //     if (found == this->mapOfIgnoredEntires.end())   this->mapOfIgnoredEntires[socialSecurity] = 1;
-    //     else                                            this->mapOfIgnoredEntires[socialSecurity]++;
-    // }
-    // catch (int e)
-    // {
-    //     switch (e)
-    //     {
-    //     case 102:  cout << "Entry with social security (" << socialSecurity << ") was not found" << endl; 
-    //         break;
-        
-    //     default:   cout << "Something went wrong in DatabaseManager::RemoveEntry" << endl; 
-    //         break;
-    //     }
-    // }
-    // catch(const std::exception& e)
-    // {
-    //     std::cerr << e.what() << endl;
-    // }
-
-
 }
 
 
@@ -211,14 +127,11 @@ int DatabaseManager::RemoveEntry(string socialSecurity)
  */
 void DatabaseManager::SaveData()
 {
-    // this->rwdata.WriteData("3", "3", "3", false);
-    // for (int i = 0; i < 10; i++)
-    // {
-    //     mapOfIgnoredEntires[to_string(i)] = 1;
-    // }
-
     this->rwdata.SaveData(mapOfIgnoredEntires);
     mapOfIgnoredEntires.clear();
+
+    string log = "\t| SAVEDATA |";
+    this->database.Log(log);
 }
 
 
@@ -237,8 +150,12 @@ void DatabaseManager::PrintDataInOrder()
 
 
 
-/**
+/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * A:  String, String, String, String
+ * RT: Void
  * 
+ * Executes the right call based on the given command. Logs the responses
+ *      (Used for ADD and UPDATE)
  * 
  */
 void DatabaseManager::ExecuteCrudOper(string command, string socialSecurity, string name, string occupation)
@@ -249,6 +166,9 @@ void DatabaseManager::ExecuteCrudOper(string command, string socialSecurity, str
         if      (response == 100)  cout << "Entry was entered in the database" << endl;
         else if (response == 101)  cout << "Database already has an entry with social security (" << socialSecurity << ")" << endl;
         else                       cout << "Something went wrong" << endl;
+
+        string log = to_string(response) + "\tADD\t\t| " + socialSecurity + " |\t| " + name + " |\t| " + occupation + " |";
+        this->database.Log(log);
     }
     else if (command == "update")
     {
@@ -256,14 +176,21 @@ void DatabaseManager::ExecuteCrudOper(string command, string socialSecurity, str
         if      (response == 100)  cout << "Entry with social security (" << socialSecurity << ") was updated" << endl;
         else if (response == 102)  cout << "Entry with social security (" << socialSecurity << ") does not exist" << endl;
         else                       cout << "Something went wrong" << endl;
+
+        string log = to_string(response) + "\tUPDATE\t\t| " + socialSecurity + " |\t| " + name + " |\t| " + occupation + " |";
+        this->database.Log(log);
     }
     else                           cout << "Something went wrong" << endl; 
 }
 
 
 
-/**
+/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * A:  String, String, String, String
+ * RT: Void
  * 
+ * Executes the right call based on the given command. Logs the responses
+ *      (Used for REMOVE and FIND)
  * 
  */
 void DatabaseManager::ExecuteCrudOper(string command, string socialSecurity)
@@ -274,6 +201,9 @@ void DatabaseManager::ExecuteCrudOper(string command, string socialSecurity)
         if      (response == 100)  cout << "Entry with social security (" << socialSecurity << ") was removed" << endl;
         else if (response == 102)  cout << "Entry with social security (" << socialSecurity << ") does not exist" << endl;
         else                       cout << "Something went wrong" << endl;
+
+        string log = to_string(response) + "\tREMOVE\t\t| " + socialSecurity + " |";
+        this->database.Log(log);
     }
     else if (command == "find") 
     {
@@ -282,6 +212,9 @@ void DatabaseManager::ExecuteCrudOper(string command, string socialSecurity)
         if (*(response) == "000000")
         {
             cout << "Entry with social security (" << socialSecurity << ") does not exist" << endl;
+
+            string log = "102\tFIND\t\t| " + socialSecurity + " |";
+            this->database.Log(log);
         }
         else
         {
@@ -289,25 +222,10 @@ void DatabaseManager::ExecuteCrudOper(string command, string socialSecurity)
             cout << "\tSS: " << *(response) << endl;
             cout << "\tOccupation: " << *(response + 2) << endl;
             cout << "\t______________________________________________________________\n" << endl;
+
+            string log = "100\tUPDATE\t\t| " + *(response) + " |\t| " + *(response+1) + " |\t| " + *(response+2) + " |";
+            this->database.Log(log);
         }
     }
     else  cout << "Something went wrong" << endl;
 }
-
-
-
-
-/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * A:  String, String, String, String
- * RT: Void
- * 
- * Performs the necessary function calls based on the given command
- * 
- */
-void DatabaseManager::ParseInput(string command)
-{
-
-}
-
-
-

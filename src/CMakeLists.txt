@@ -1,7 +1,8 @@
 add_library(
     database
     cli/cli.cpp
-    rwdata/rwdata.cpp
-    datastructure/datastructure.cpp
     databasemanager/databasemanager.cpp
+    datastructure/datastructure.cpp
+    logger/logger.cpp
+    rwdata/rwdata.cpp
 )

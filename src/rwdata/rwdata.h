@@ -12,7 +12,7 @@
 
 namespace rwdata_std
 {
-	class RWData
+	class RWData: public Logger
 	{
 	private:
 		int 		fileNumber;

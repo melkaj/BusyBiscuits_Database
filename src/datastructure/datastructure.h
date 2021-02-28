@@ -7,8 +7,10 @@
 // ======================================================================
 
 #pragma once
+#include "../logger/logger.h"
 #include <string>
 
+using namespace logger_std;
 using namespace std;
 
 // #ifndef DATASTRUCTURE_H
@@ -16,7 +18,7 @@ using namespace std;
 
 namespace datastructure_std
 {
-    class Datastructure
+    class Datastructure: public Logger
     {
     private:
         static const int tableSize = 4;

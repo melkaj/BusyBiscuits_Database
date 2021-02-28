@@ -22,17 +22,17 @@ namespace databasemanager_std
 
             unordered_map<string, int>          mapOfIgnoredEntires;
 
+            int                                 AddEntry        (string socialSecurity, string name, string occupation);
+            int                                 UpdateEntry     (string socialSecurity, string name, string occupation);
+            int                                 RemoveEntry     (string socialSecurity);
+
 
         public:
             DatabaseManager();
             ~DatabaseManager();
-            int                                 AddEntry        (string socialSecurity, string name, string occupation);
-            int                                 UpdateEntry     (string socialSecurity, string name, string occupation);
-            int                                 RemoveEntry     (string socialSecurity);
             void                                SaveData        ();
             void                                PrintDataInOrder();
             void                                ExecuteCrudOper (string command, string socialSecurity, string name, string occupation);
             void                                ExecuteCrudOper (string command, string socialSecurity);
-            void                                ParseInput      (string command);
     };
 }
