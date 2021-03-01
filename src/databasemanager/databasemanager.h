@@ -29,7 +29,7 @@ namespace databasemanager_std
 
         public:
             DatabaseManager();
-            ~DatabaseManager();
+            // ~DatabaseManager();
             void                                SaveData        ();
             void                                PrintDataInOrder();
             void                                ExecuteCrudOper (string command, string socialSecurity, string name, string occupation);

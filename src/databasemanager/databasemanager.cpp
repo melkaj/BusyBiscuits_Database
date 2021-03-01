@@ -34,20 +34,6 @@ DatabaseManager::DatabaseManager()
 
 
 /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * A:  None
- * RT: None
- * 
- * Destructor
- * 
- */
-DatabaseManager::~DatabaseManager()
-{
-    cout << "DatabaseManager destructor...\n" << endl;
-}
-
-
-
-/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * A:  String, String, String
  * RT: Integer
  * 
@@ -163,24 +149,24 @@ void DatabaseManager::ExecuteCrudOper(string command, string socialSecurity, str
     if (command == "add")
     {
         int response = AddEntry(socialSecurity, name, occupation);
-        if      (response == 100)  cout << "Entry was entered in the database" << endl;
-        else if (response == 101)  cout << "Database already has an entry with social security (" << socialSecurity << ")" << endl;
-        else                       cout << "Something went wrong" << endl;
+        if      (response == 100)  cout << "\tEntry was entered in the database\n" << endl;
+        else if (response == 101)  cout << "\tDatabase already has an entry with social security (" << socialSecurity << ")\n" << endl;
+        else                       cout << "\tSomething went wrong\n" << endl;
 
-        string log = to_string(response) + "\tADD\t\t| " + socialSecurity + " |\t| " + name + " |\t| " + occupation + " |";
+        string log = to_string(response) + "\tADD\t\t| " + socialSecurity + " |\t| " + name + " |\t\t\t| " + occupation + " |";
         this->database.Log(log);
     }
     else if (command == "update")
     {
         int response = UpdateEntry(socialSecurity, name, occupation);
-        if      (response == 100)  cout << "Entry with social security (" << socialSecurity << ") was updated" << endl;
-        else if (response == 102)  cout << "Entry with social security (" << socialSecurity << ") does not exist" << endl;
+        if      (response == 100)  cout << "\tEntry with social security (" << socialSecurity << ") was updated\n" << endl;
+        else if (response == 102)  cout << "\tEntry with social security (" << socialSecurity << ") does not exist\n" << endl;
         else                       cout << "Something went wrong" << endl;
 
-        string log = to_string(response) + "\tUPDATE\t| " + socialSecurity + " |\t| " + name + " |\t| " + occupation + " |";
+        string log = to_string(response) + "\tUPDATE\t| " + socialSecurity + " |\t| " + name + " |\t\t\t| " + occupation + " |";
         this->database.Log(log);
     }
-    else                           cout << "Something went wrong" << endl; 
+    else                           cout << "\tSomething went wrong\n" << endl; 
 }
 
 
@@ -198,9 +184,9 @@ void DatabaseManager::ExecuteCrudOper(string command, string socialSecurity)
     if (command == "remove")    
     {
         int response = RemoveEntry(socialSecurity);
-        if      (response == 100)  cout << "Entry with social security (" << socialSecurity << ") was removed" << endl;
-        else if (response == 102)  cout << "Entry with social security (" << socialSecurity << ") does not exist" << endl;
-        else                       cout << "Something went wrong" << endl;
+        if      (response == 100)  cout << "\tEntry with social security (" << socialSecurity << ") was removed\n" << endl;
+        else if (response == 102)  cout << "\tEntry with social security (" << socialSecurity << ") does not exist\n" << endl;
+        else                       cout << "\tSomething went wrong\n" << endl;
 
         string log = to_string(response) + "\tREMOVE\t| " + socialSecurity + " |";
         this->database.Log(log);
@@ -211,7 +197,7 @@ void DatabaseManager::ExecuteCrudOper(string command, string socialSecurity)
 
         if (*(response) == "000000")
         {
-            cout << "Entry with social security (" << socialSecurity << ") does not exist" << endl;
+            cout << "\tEntry with social security (" << socialSecurity << ") does not exist\n" << endl;
 
             string log = "102\tFIND\t\t| " + socialSecurity + " |";
             this->database.Log(log);
@@ -227,5 +213,5 @@ void DatabaseManager::ExecuteCrudOper(string command, string socialSecurity)
             this->database.Log(log);
         }
     }
-    else  cout << "Something went wrong" << endl;
+    else  cout << "\tSomething went wrong\n" << endl;
 }

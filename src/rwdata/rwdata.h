@@ -20,7 +20,7 @@ namespace rwdata_std
 
 	public:
 		RWData						();
-		~RWData						();
+
 		string		Getdb1FilePath  ();
 		string		Getdb2FilePath  ();
 

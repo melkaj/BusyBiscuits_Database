@@ -43,21 +43,11 @@ RWData::RWData()
 
 		datafile.close();
 	}
-	else  cout << "Unable to open file..." << endl;
-}
-
-
-
-/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * A:  None
- * RT: Void
- * 
- * Deconstructor
- * 
- */
-RWData::~RWData()
-{
-	cout << "RWData deconstructor...\n" << endl;
+	else  
+	{
+		string error = "Unable to open file in RWData::RWData";
+		cout << error << endl;  Log(error);
+	}
 }
 
 
@@ -89,7 +79,6 @@ string RWData::Getdb2FilePath()  { return db2FilePath; }
 void RWData::ToggleMainFile()
 {
 	this->fileNumber = (this->fileNumber + 1) % 2;
-	cout << "this->fileNumber: " << this->fileNumber << endl;
 }
 
 
@@ -116,7 +105,11 @@ void RWData::WriteData(string socialSecurity, string name, string occupation, bo
 	else if (this->fileNumber == 1 && isOverwrite == false)	 datafile.open(db2, ios::app);
 	else if (this->fileNumber == 0 && isOverwrite == true)	 datafile.open(db1, ios::out);
 	else if (this->fileNumber == 1 && isOverwrite == true)	 datafile.open(db2, ios::out);
-	else	cout << "Something went wrong in RWData::WriteData..." << endl;
+	else
+	{
+		string error = "Something went wrong in RWDAta::WriteData";
+		cout << error << endl;  Log(error);
+	}
 
 	if (datafile.is_open())
 	{
@@ -125,7 +118,11 @@ void RWData::WriteData(string socialSecurity, string name, string occupation, bo
 		datafile << occupation << endl;
 		datafile.close();
 	} 
-	else cout << "Unable to open file" << endl;
+	else
+	{
+		string error = "Unable to open file in RWData::WriteData";
+		cout << error << endl;  Log(error);
+	}
 }
 
 
@@ -145,7 +142,11 @@ void RWData::ReadInData(datastructure_std::Datastructure &datastructure)
 	// Opening the 'main' storage file
 	if      (this->fileNumber == 0)	 datafile.open(db1FilePath);
 	else if (this->fileNumber == 1)  datafile.open(db2FilePath);
-	else							 cout << "Something went wrong in RWData::ReadInData(datastructure)..." << endl;
+	else
+	{
+		string error = "Something went wrong in RWData::ReadInData(datastructure)";
+		cout << error << endl;  Log(error);
+	}
 
 	if (datafile.is_open())
 	{
@@ -177,16 +178,21 @@ void RWData::ReadInData(datastructure_std::Datastructure &datastructure)
 		}
 		datafile.close();
 	}
-	else cout << "Unable to open file (ReadInData(datastructure))" << endl;
+	else
+	{
+		string error = "Unable to open file in ReadInData(datastructure)";
+		cout << error << endl;  Log(error); 
+	}
 
-	cout << "Data has been unloaded to the datastructure..." << endl;
+	string log = "Data has been unloaded to the datastructure..."; 
+	Log(log);
 }
 
 
 
 /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * A:  None
- * RT: Void
+ * RT: Void	
  * 
  * Applys the modifications on the current main data file and putting it
  * 		to the other file. Then toggling the main file 
@@ -194,8 +200,6 @@ void RWData::ReadInData(datastructure_std::Datastructure &datastructure)
  */
 void RWData::SaveData(unordered_map<string, int> &ignoredEntry)
 {
-	cout << "RWData::SaveData has started..." << endl;
-
 	string   line;
 	ifstream dataFileMain;		// The file with all the data and user modifications
 	ofstream dataFileNewMain;	// Where all the updated data will go
@@ -205,7 +209,11 @@ void RWData::SaveData(unordered_map<string, int> &ignoredEntry)
 	// Opening the main file as a read and the other as a write
 	if      (this->fileNumber == 0)	 { dataFileMain.open(db1FilePath); dataFileNewMain.open(db2FilePath); }
 	else if (this->fileNumber == 1)  { dataFileMain.open(db2FilePath); dataFileNewMain.open(db1FilePath); }
-	else							 cout << "Something went wrong in RWData::SaveData()..." << endl;
+	else
+	{
+		string error = "Something went wrong in RWData::SaveData()";
+		cout << error << endl; Log(error);
+	}
 
 	if (dataFileMain.is_open() && dataFileNewMain.is_open())
 	{
@@ -234,16 +242,22 @@ void RWData::SaveData(unordered_map<string, int> &ignoredEntry)
 		dataFileMain.close(); 
 		dataFileNewMain.close();
 	}
-	else  cout << "Unable to open file (RWData::SaveData())..." << endl;
+	else  
+	{
+		string error = "Unable to open file in RWData::SaveData()";
+		cout << error << endl;  Log(error);
+	}
 
 	// Delete contents on original main file	(MAYBE PLACE IN A NEW FUNCTION)
 	if      (this->fileNumber == 0)	 { dataFileNewMain.open(db1FilePath); }
 	else if (this->fileNumber == 1)  { dataFileNewMain.open(db2FilePath); }
-	else							 cout << "Something went wrong in RWData::SaveData()..." << endl;
+	else
+	{
+		string error = "Something went wrong in RWData::SaveData()";
+		cout << error << endl;  Log(error);
+	}
 
 	if (dataFileNewMain.is_open())  { dataFileNewMain << "/" << endl;  dataFileNewMain.close(); }
 
 	this->ToggleMainFile();
-
-	cout << "RWData::SaveData has finished...\n" << endl;
 }

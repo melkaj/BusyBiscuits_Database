@@ -19,7 +19,7 @@ namespace cli_std
 
         public:
             CLI();
-            ~CLI();
+            // ~CLI();
 
             void MainLoop();
     

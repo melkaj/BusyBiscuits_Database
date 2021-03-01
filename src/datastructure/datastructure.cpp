@@ -42,14 +42,14 @@ Datastructure::Datastructure()
  */
 Datastructure::~Datastructure()
 {
-    cout << "DataStructure deconstructor..." << endl;
+    Log("DataStructure deconstructor...");
     int count = 0;
     for (int i = 0; i < tableSize; i++)
     {
         count += DeleteSubTree(HashTable[i]);
     }
-    cout << "Deleted " << count << " node(s)..." << endl;
-    cout << "======================================================================\n" << endl;
+    string log = "Deleted " + to_string(count) + " node(s)...\n======================================================================\n\n";
+    Log(log);
 }
 
 
@@ -71,8 +71,10 @@ int Datastructure::DeleteSubTree(Datastructure::node* ptr)
     {
         if (ptr->left != NULL)   count += DeleteSubTree(ptr->left);
         if (ptr->right != NULL)  count += DeleteSubTree(ptr->right);
-        cout << "From deconstructor helper function - Deleting node: " << 
-            ptr->socialSecurity << '\t' << ptr->name << '\t' << ptr->occupation << endl;
+
+        string log = "From deconstructor helper function - Deleting node: | " + ptr->socialSecurity + " |\t| " + ptr->name + " |\t\t\t| " + ptr->occupation + " |";
+        Log(log);
+
         delete ptr;
         count += 1;
     }
@@ -223,7 +225,7 @@ void Datastructure::PrintDatabaseInOrder()
         cout << "======================================================================" << endl;
         PrintDatabaseInOrder_P(HashTable[i]);
     }
-    cout << "======================================================================" << endl;
+    cout << "======================================================================\n" << endl;
 }
 
 
