@@ -177,7 +177,7 @@ void DatabaseManager::ExecuteCrudOper(string command, string socialSecurity, str
         else if (response == 102)  cout << "Entry with social security (" << socialSecurity << ") does not exist" << endl;
         else                       cout << "Something went wrong" << endl;
 
-        string log = to_string(response) + "\tUPDATE\t\t| " + socialSecurity + " |\t| " + name + " |\t| " + occupation + " |";
+        string log = to_string(response) + "\tUPDATE\t| " + socialSecurity + " |\t| " + name + " |\t| " + occupation + " |";
         this->database.Log(log);
     }
     else                           cout << "Something went wrong" << endl; 
@@ -202,7 +202,7 @@ void DatabaseManager::ExecuteCrudOper(string command, string socialSecurity)
         else if (response == 102)  cout << "Entry with social security (" << socialSecurity << ") does not exist" << endl;
         else                       cout << "Something went wrong" << endl;
 
-        string log = to_string(response) + "\tREMOVE\t\t| " + socialSecurity + " |";
+        string log = to_string(response) + "\tREMOVE\t| " + socialSecurity + " |";
         this->database.Log(log);
     }
     else if (command == "find") 

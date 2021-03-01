@@ -14,3 +14,9 @@
 [Sun Feb 28 14:29:49 2021]: 	| SAVEDATA |
 [Sun Feb 28 14:29:56 2021]: 100	REMOVE		| \\\\\\ |
 [Sun Feb 28 14:30:06 2021]: 	| SAVEDATA |
+[Sun Feb 28 20:19:46 2021]: 100	ADD		| 123543 |	| Allen Iverson |	| Basketball Player |
+[Sun Feb 28 20:20:07 2021]: 	| SAVEDATA |
+[Sun Feb 28 20:40:43 2021]: 100	ADD		| 123234 |	| Shaquille O Neal |	| Analyst |
+[Sun Feb 28 20:41:05 2021]: 100	UPDATE	| 123130 |	| Kevin Malone |	| Bar Owner |
+[Sun Feb 28 20:41:26 2021]: 100	REMOVE	| 123125 |
+[Sun Feb 28 20:41:42 2021]: 	| SAVEDATA |

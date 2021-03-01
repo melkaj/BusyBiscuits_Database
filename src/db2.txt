@@ -4,9 +4,6 @@ Branch Manager
 123123
 Dwight Schrute
 Paper Salesman
-123125
-Oscar Martinez
-Accountant
 123128
 Darryl Philbin
 Foreman
@@ -25,6 +22,12 @@ Human Resouces
 123213
 Kobe Bean Bryant
 NBA Player
+123543
+Allen Iverson
+Basketball Player
+123234
+Shaquille O Neal
+Analyst
 123130
 Kevin Malone
-Accountant
+Bar Owner

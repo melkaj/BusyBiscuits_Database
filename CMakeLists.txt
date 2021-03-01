@@ -22,3 +22,12 @@ add_subdirectory(test)
 # add_executable(main ${source_files})
 add_executable(main src/main.cpp)
 target_link_libraries(main PRIVATE database)
+
+install(TARGETS main DESTINATION ${PROJECT_SOURCE_DIR}/build/installer/bin)
+# install(TARGETS ${PROJECT_SOURCE_DIR}/BBDConfig.h DESTINATION ${PROJECT_SOURCE_DIR}/build/installer/include)
+
+include(InstallRequiredSystemLibraries)
+set(CPACK_RESOURCE_FILE_LICENSE "${PROJECT_SOURCE_DIR}/LICENSE")
+set(CPACK_PACKAGE_VERSION_MAJOR "${Tutorial_VERSION_MAJOR}")
+set(CPACK_PACKAGE_VERSION_MINOR "${Tutorial_VERSION_MINOR}")
+include(CPack)

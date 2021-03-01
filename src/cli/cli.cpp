@@ -89,6 +89,10 @@ void CLI::MainLoop()
         {
             this->databasemanager.SaveData();
         }
+        else if (command == "quit")
+        {
+            cout << "Goodbye..." << endl;
+        }
         else 
         {
             cout << "Command entered was invalid. Retry" << endl;
