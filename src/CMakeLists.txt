@@ -9,5 +9,5 @@ add_library(
 
 file(GLOB_RECURSE header_files "./*.h")
 
-install(TARGETS database DESTINATION ${PROJECT_SOURCE_DIR}/build/installer/lib)
-install(FILES ${header_files} DESTINATION ${PROJECT_SOURCE_DIR}/build/installer/include)
+install(TARGETS database DESTINATION lib) #${PROJECT_SOURCE_DIR}/build/installer/lib)
+install(FILES ${header_files} DESTINATION include) # ${PROJECT_SOURCE_DIR}/build/installer/include)

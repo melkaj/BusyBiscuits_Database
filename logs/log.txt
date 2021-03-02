@@ -153,3 +153,46 @@
 ======================================================================
 
 
+[Mon Mar  1 22:37:02 2021]: Data has been unloaded to the datastructure...
+[Mon Mar  1 22:37:41 2021]: 100	ADD		| 102847 |	| Zion Williamson |			| Dunker |
+[Mon Mar  1 22:37:56 2021]: 100	REMOVE	| 123234 |
+[Mon Mar  1 22:38:14 2021]: 	| SAVEDATA |
+[Mon Mar  1 22:38:35 2021]: 102	UPDATE	| 123234 |	| Shaquille o Neal |			| Big Hodda |
+[Mon Mar  1 22:39:11 2021]: 	| SAVEDATA |
+[Mon Mar  1 22:39:13 2021]: 	| SAVEDATA |
+[Mon Mar  1 22:39:13 2021]: DataStructure deconstructor...
+[Mon Mar  1 22:39:13 2021]: From deconstructor helper function - Deleting node: | 123127 |	| Fire-d Guy |			| Unemployed |
+[Mon Mar  1 22:39:13 2021]: From deconstructor helper function - Deleting node: | 123213 |	| Kobe Bean Bryant |			| NBA Player |
+[Mon Mar  1 22:39:13 2021]: From deconstructor helper function - Deleting node: | 123132 |	| Michael Jordan |			| GOAT |
+[Mon Mar  1 22:39:13 2021]: From deconstructor helper function - Deleting node: | 123123 |	| Dwight Schrute |			| Paper Salesman |
+[Mon Mar  1 22:39:13 2021]: From deconstructor helper function - Deleting node: | 123456 |	| Khabib Nurmagamaedov |			| WelterWeight Champion |
+[Mon Mar  1 22:39:13 2021]: From deconstructor helper function - Deleting node: | 123128 |	| Darryl Philbin |			| Foreman |
+[Mon Mar  1 22:39:13 2021]: From deconstructor helper function - Deleting node: | 123124 |	| Michael Scott |			| Branch Manager |
+[Mon Mar  1 22:39:13 2021]: From deconstructor helper function - Deleting node: | 102847 |	| Zion Williamson |			| Dunker |
+[Mon Mar  1 22:39:13 2021]: From deconstructor helper function - Deleting node: | 123130 |	| Kevin Malone |			| Bar Owner |
+[Mon Mar  1 22:39:13 2021]: From deconstructor helper function - Deleting node: | 123543 |	| Allen Iverson |			| Basketball Player |
+[Mon Mar  1 22:39:13 2021]: From deconstructor helper function - Deleting node: | 102938 |	| James Holtzour |			| Jepardy Champion |
+[Mon Mar  1 22:39:13 2021]: From deconstructor helper function - Deleting node: | 123126 |	| Holly Flax |			| Human Resouces |
+[Mon Mar  1 22:39:13 2021]: Deleted 12 node(s)...
+======================================================================
+
+
+[Mon Mar  1 22:39:25 2021]: Data has been unloaded to the datastructure...
+[Mon Mar  1 22:39:28 2021]: 	| SAVEDATA |
+[Mon Mar  1 22:39:28 2021]: DataStructure deconstructor...
+[Mon Mar  1 22:39:28 2021]: From deconstructor helper function - Deleting node: | 123127 |	| Fire-d Guy |			| Unemployed |
+[Mon Mar  1 22:39:28 2021]: From deconstructor helper function - Deleting node: | 123213 |	| Kobe Bean Bryant |			| NBA Player |
+[Mon Mar  1 22:39:28 2021]: From deconstructor helper function - Deleting node: | 123132 |	| Michael Jordan |			| GOAT |
+[Mon Mar  1 22:39:28 2021]: From deconstructor helper function - Deleting node: | 123123 |	| Dwight Schrute |			| Paper Salesman |
+[Mon Mar  1 22:39:28 2021]: From deconstructor helper function - Deleting node: | 123456 |	| Khabib Nurmagamaedov |			| WelterWeight Champion |
+[Mon Mar  1 22:39:28 2021]: From deconstructor helper function - Deleting node: | 123128 |	| Darryl Philbin |			| Foreman |
+[Mon Mar  1 22:39:28 2021]: From deconstructor helper function - Deleting node: | 123124 |	| Michael Scott |			| Branch Manager |
+[Mon Mar  1 22:39:28 2021]: From deconstructor helper function - Deleting node: | 102847 |	| Zion Williamson |			| Dunker |
+[Mon Mar  1 22:39:28 2021]: From deconstructor helper function - Deleting node: | 123130 |	| Kevin Malone |			| Bar Owner |
+[Mon Mar  1 22:39:28 2021]: From deconstructor helper function - Deleting node: | 123543 |	| Allen Iverson |			| Basketball Player |
+[Mon Mar  1 22:39:28 2021]: From deconstructor helper function - Deleting node: | 102938 |	| James Holtzour |			| Jepardy Champion |
+[Mon Mar  1 22:39:28 2021]: From deconstructor helper function - Deleting node: | 123126 |	| Holly Flax |			| Human Resouces |
+[Mon Mar  1 22:39:28 2021]: Deleted 12 node(s)...
+======================================================================
+
+
