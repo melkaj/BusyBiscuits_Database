@@ -67,23 +67,23 @@ However, the following are things I would add if I ever wanted to keep working o
 ![1](./screenshots/Main_menu.png)
 
 ### help command ###
-![2](./screenshots/help.PNG) 
+![2](./screenshots/help.png) 
 
 ### add command ###
-![3](./screenshots/add.PNG) 
+![3](./screenshots/add.png) 
 
 ### update command ###
-![4](./screenshots/update.PNG) 
+![4](./screenshots/update.png) 
 
 ### remove command ###
-![4](./screenshots/remove.PNG) 
+![4](./screenshots/remove.png) 
 
 ### find command ###
-![5](./screenshots/find.PNG) 
+![5](./screenshots/find.png) 
 
 ### print command ###
 The hash table, for development purposes, was set to a length of 4 buckets. I wanted there to be more collisions so that I can see the behavior of the data structure. I know in a real-life scenario, the more buckets, the better the performance is.
-![6](./screenshots/print.PNG) 
+![6](./screenshots/print.png) 
 
 ### save command ###
-![7](./screenshots/save.PNG) 
+![7](./screenshots/save.png) 
