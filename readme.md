@@ -64,7 +64,7 @@ However, the following are things I would add if I ever wanted to keep working o
 ## A few screenshots of the application <a name="screenshots"></a>
 
 ### Greeting from the initial open of the application ###
-![1](./screenshots/main_menu.PNG)
+![1](./screenshots/Main_menu.png)
 
 ### help command ###
 ![2](./screenshots/help.PNG) 
