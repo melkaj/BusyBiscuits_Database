@@ -196,3 +196,64 @@
 ======================================================================
 
 
+[Tue Mar  2 11:22:45 2021]: Data has been unloaded to the datastructure...
+[Tue Mar  2 11:22:50 2021]: 	| SAVEDATA |
+[Tue Mar  2 11:22:50 2021]: DataStructure deconstructor...
+[Tue Mar  2 11:22:50 2021]: From deconstructor helper function - Deleting node: | 123127 |	| Fire-d Guy |			| Unemployed |
+[Tue Mar  2 11:22:50 2021]: From deconstructor helper function - Deleting node: | 123213 |	| Kobe Bean Bryant |			| NBA Player |
+[Tue Mar  2 11:22:50 2021]: From deconstructor helper function - Deleting node: | 123132 |	| Michael Jordan |			| GOAT |
+[Tue Mar  2 11:22:50 2021]: From deconstructor helper function - Deleting node: | 123123 |	| Dwight Schrute |			| Paper Salesman |
+[Tue Mar  2 11:22:50 2021]: From deconstructor helper function - Deleting node: | 123456 |	| Khabib Nurmagamaedov |			| WelterWeight Champion |
+[Tue Mar  2 11:22:50 2021]: From deconstructor helper function - Deleting node: | 123128 |	| Darryl Philbin |			| Foreman |
+[Tue Mar  2 11:22:50 2021]: From deconstructor helper function - Deleting node: | 123124 |	| Michael Scott |			| Branch Manager |
+[Tue Mar  2 11:22:50 2021]: From deconstructor helper function - Deleting node: | 102847 |	| Zion Williamson |			| Dunker |
+[Tue Mar  2 11:22:50 2021]: From deconstructor helper function - Deleting node: | 123130 |	| Kevin Malone |			| Bar Owner |
+[Tue Mar  2 11:22:50 2021]: From deconstructor helper function - Deleting node: | 123543 |	| Allen Iverson |			| Basketball Player |
+[Tue Mar  2 11:22:50 2021]: From deconstructor helper function - Deleting node: | 102938 |	| James Holtzour |			| Jepardy Champion |
+[Tue Mar  2 11:22:50 2021]: From deconstructor helper function - Deleting node: | 123126 |	| Holly Flax |			| Human Resouces |
+[Tue Mar  2 11:22:50 2021]: Deleted 12 node(s)...
+======================================================================
+
+
+[Tue Mar  2 11:23:08 2021]: Data has been unloaded to the datastructure...
+[Tue Mar  2 11:23:35 2021]: 100	ADD		| 111222 |	| Meldin Kajoshaj |			| Engineer |
+[Tue Mar  2 11:23:58 2021]: 	| SAVEDATA |
+[Tue Mar  2 11:23:59 2021]: 	| SAVEDATA |
+[Tue Mar  2 11:23:59 2021]: DataStructure deconstructor...
+[Tue Mar  2 11:23:59 2021]: From deconstructor helper function - Deleting node: | 123127 |	| Fire-d Guy |			| Unemployed |
+[Tue Mar  2 11:23:59 2021]: From deconstructor helper function - Deleting node: | 123213 |	| Kobe Bean Bryant |			| NBA Player |
+[Tue Mar  2 11:23:59 2021]: From deconstructor helper function - Deleting node: | 123132 |	| Michael Jordan |			| GOAT |
+[Tue Mar  2 11:23:59 2021]: From deconstructor helper function - Deleting node: | 123123 |	| Dwight Schrute |			| Paper Salesman |
+[Tue Mar  2 11:23:59 2021]: From deconstructor helper function - Deleting node: | 111222 |	| Meldin Kajoshaj |			| Engineer |
+[Tue Mar  2 11:23:59 2021]: From deconstructor helper function - Deleting node: | 123456 |	| Khabib Nurmagamaedov |			| WelterWeight Champion |
+[Tue Mar  2 11:23:59 2021]: From deconstructor helper function - Deleting node: | 123128 |	| Darryl Philbin |			| Foreman |
+[Tue Mar  2 11:23:59 2021]: From deconstructor helper function - Deleting node: | 123124 |	| Michael Scott |			| Branch Manager |
+[Tue Mar  2 11:23:59 2021]: From deconstructor helper function - Deleting node: | 102847 |	| Zion Williamson |			| Dunker |
+[Tue Mar  2 11:23:59 2021]: From deconstructor helper function - Deleting node: | 123130 |	| Kevin Malone |			| Bar Owner |
+[Tue Mar  2 11:23:59 2021]: From deconstructor helper function - Deleting node: | 123543 |	| Allen Iverson |			| Basketball Player |
+[Tue Mar  2 11:23:59 2021]: From deconstructor helper function - Deleting node: | 102938 |	| James Holtzour |			| Jepardy Champion |
+[Tue Mar  2 11:23:59 2021]: From deconstructor helper function - Deleting node: | 123126 |	| Holly Flax |			| Human Resouces |
+[Tue Mar  2 11:23:59 2021]: Deleted 13 node(s)...
+======================================================================
+
+
+[Tue Mar  2 11:25:14 2021]: Data has been unloaded to the datastructure...
+[Tue Mar  2 11:25:24 2021]: 	| SAVEDATA |
+[Tue Mar  2 11:25:24 2021]: DataStructure deconstructor...
+[Tue Mar  2 11:25:24 2021]: From deconstructor helper function - Deleting node: | 123127 |	| Fire-d Guy |			| Unemployed |
+[Tue Mar  2 11:25:24 2021]: From deconstructor helper function - Deleting node: | 123213 |	| Kobe Bean Bryant |			| NBA Player |
+[Tue Mar  2 11:25:24 2021]: From deconstructor helper function - Deleting node: | 123132 |	| Michael Jordan |			| GOAT |
+[Tue Mar  2 11:25:24 2021]: From deconstructor helper function - Deleting node: | 123123 |	| Dwight Schrute |			| Paper Salesman |
+[Tue Mar  2 11:25:24 2021]: From deconstructor helper function - Deleting node: | 111222 |	| Meldin Kajoshaj |			| Engineer |
+[Tue Mar  2 11:25:24 2021]: From deconstructor helper function - Deleting node: | 123456 |	| Khabib Nurmagamaedov |			| WelterWeight Champion |
+[Tue Mar  2 11:25:24 2021]: From deconstructor helper function - Deleting node: | 123128 |	| Darryl Philbin |			| Foreman |
+[Tue Mar  2 11:25:24 2021]: From deconstructor helper function - Deleting node: | 123124 |	| Michael Scott |			| Branch Manager |
+[Tue Mar  2 11:25:24 2021]: From deconstructor helper function - Deleting node: | 102847 |	| Zion Williamson |			| Dunker |
+[Tue Mar  2 11:25:24 2021]: From deconstructor helper function - Deleting node: | 123130 |	| Kevin Malone |			| Bar Owner |
+[Tue Mar  2 11:25:24 2021]: From deconstructor helper function - Deleting node: | 123543 |	| Allen Iverson |			| Basketball Player |
+[Tue Mar  2 11:25:24 2021]: From deconstructor helper function - Deleting node: | 102938 |	| James Holtzour |			| Jepardy Champion |
+[Tue Mar  2 11:25:24 2021]: From deconstructor helper function - Deleting node: | 123126 |	| Holly Flax |			| Human Resouces |
+[Tue Mar  2 11:25:24 2021]: Deleted 13 node(s)...
+======================================================================
+
+

@@ -18,7 +18,7 @@ namespace logger_std
     {
         private:
             ofstream log_file;
-            string   log_file_path;
+            string   log_file_name;
 
         public:
             Logger();

@@ -28,12 +28,13 @@ using namespace std;
 RWData::RWData()
 {
 	// Initializing filenames
-	db1FilePath = "/home/mel/Desktop/BusyBiscuits_Database/src/db1.txt";
-	db2FilePath = "/home/mel/Desktop/BusyBiscuits_Database/src/db2.txt";
+	this->db1FileName = "db1.txt";
+	this->db2FileName = "db2.txt";
 
 	string   line;
-	ifstream datafile(db1FilePath);
+	ifstream datafile(this->db1FileName);
 
+	// Checks if one of the files exists
 	if (datafile.is_open())
 	{
 		getline(datafile, line);
@@ -45,26 +46,38 @@ RWData::RWData()
 	}
 	else  
 	{
-		string error = "Unable to open file in RWData::RWData";
-		cout << error << endl;  Log(error);
+		// Checks if the other file exists
+		datafile.open(this->db2FileName);
+		if (datafile.is_open())
+		{
+			getline(datafile, line);
+			
+			if (line == "/")	this->fileNumber = 1;
+			else				this->fileNumber = 0;
+
+			datafile.close();			
+		}
+		else
+		{
+			// Creates both files
+			ofstream mainfile("db1.txt", ios::out);
+			ofstream secondaryfile("db2.txt", ios::out);
+
+			if (secondaryfile.is_open() && mainfile.is_open())  
+			{  
+				secondaryfile << "/" << endl;  
+				datafile.close(); 
+
+				this->fileNumber = 0;
+			}
+			else
+			{
+				string error = "\tUnable to open file in RWData::RWData";
+				cout << error << endl;  Log(error);
+			}
+		}
 	}
 }
-
-
-
-/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * A:  None
- * RT: String
- * 
- * Getters for the filenames. The files are used for the handling of the data
- * 		One file is used for modifications. And then when its time to save the 
- *		data, the modifications are applied and all the data is stored on the
- * 		other file
- * 
- */
-
-string RWData::Getdb1FilePath()  { return db1FilePath; } 
-string RWData::Getdb2FilePath()  { return db2FilePath; } 
 
 
 
@@ -87,6 +100,7 @@ void RWData::ToggleMainFile()
  * A:  Integer, String, String, Bool
  * RT: Void
  * 
+ * 
  * Writes given entries to the file. If bool is set to false, then the data
  * 		will be appended to the file. If its set to true, then the data will
  * 		overwrite the file
@@ -97,8 +111,8 @@ void RWData::WriteData(string socialSecurity, string name, string occupation, bo
 	string   line;
 	ofstream datafile;
 
-	string   db1 = db1FilePath;
-	string   db2 = db2FilePath;
+	string   db1 = this->db1FileName;
+	string   db2 = this->db2FileName;
 
 	// Loding the main file that will be written to
 	if 		(this->fileNumber == 0 && isOverwrite == false)	 datafile.open(db1, ios::app);
@@ -140,8 +154,8 @@ void RWData::ReadInData(datastructure_std::Datastructure &datastructure)
 	ifstream datafile;
 
 	// Opening the 'main' storage file
-	if      (this->fileNumber == 0)	 datafile.open(db1FilePath);
-	else if (this->fileNumber == 1)  datafile.open(db2FilePath);
+	if      (this->fileNumber == 0)	 datafile.open(this->db1FileName);
+	else if (this->fileNumber == 1)  datafile.open(this->db2FileName);
 	else
 	{
 		string error = "Something went wrong in RWData::ReadInData(datastructure)";
@@ -207,8 +221,8 @@ void RWData::SaveData(unordered_map<string, int> &ignoredEntry)
 	string   entry[3];
 
 	// Opening the main file as a read and the other as a write
-	if      (this->fileNumber == 0)	 { dataFileMain.open(db1FilePath); dataFileNewMain.open(db2FilePath); }
-	else if (this->fileNumber == 1)  { dataFileMain.open(db2FilePath); dataFileNewMain.open(db1FilePath); }
+	if      (this->fileNumber == 0)	 { dataFileMain.open(this->db1FileName); dataFileNewMain.open(this->db2FileName); }
+	else if (this->fileNumber == 1)  { dataFileMain.open(this->db2FileName); dataFileNewMain.open(this->db1FileName); }
 	else
 	{
 		string error = "Something went wrong in RWData::SaveData()";
@@ -249,8 +263,8 @@ void RWData::SaveData(unordered_map<string, int> &ignoredEntry)
 	}
 
 	// Delete contents on original main file	(MAYBE PLACE IN A NEW FUNCTION)
-	if      (this->fileNumber == 0)	 { dataFileNewMain.open(db1FilePath); }
-	else if (this->fileNumber == 1)  { dataFileNewMain.open(db2FilePath); }
+	if      (this->fileNumber == 0)	 { dataFileNewMain.open(this->db1FileName); }
+	else if (this->fileNumber == 1)  { dataFileNewMain.open(this->db2FileName); }
 	else
 	{
 		string error = "Something went wrong in RWData::SaveData()";

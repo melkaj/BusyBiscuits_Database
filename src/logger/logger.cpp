@@ -9,7 +9,7 @@
 #include "logger.h"
 #include <stdio.h>
 #include <ctime>
-#include <iostream>     // maybe delete this
+#include <iostream>  
 
 using namespace logger_std;
 
@@ -25,18 +25,21 @@ using namespace logger_std;
  */
 Logger::Logger()
 {
-    this->log_file_path = "/home/mel/Desktop/BusyBiscuits_Database/logs/log.txt";
+    this->log_file_name = "log.txt";
 }
 
 
 
 /**
+ * A:  String
+ * RT: Void
  * 
+ * Formats a message a logs it into the log file
  * 
  */
 void Logger::Log(string message)
 {
-    ofstream log_file(this->log_file_path, ios::app);
+    ofstream log_file(this->log_file_name, ios::app);
 
     if (log_file.is_open())
     {
@@ -46,5 +49,5 @@ void Logger::Log(string message)
         log_file << '[' << formatted << "]: " << message << endl;
         log_file.close();
     }
-    else  cout << "Unable to open file..." << endl;
+    else  cout << "Unable to open file in logger::Log" << endl;
 }

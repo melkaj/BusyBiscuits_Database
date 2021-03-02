@@ -24,7 +24,7 @@ add_executable(main src/main.cpp)
 target_link_libraries(main PRIVATE database)
 
 install(TARGETS main DESTINATION bin) #${PROJECT_SOURCE_DIR}/build/installer/bin)
-install(TARGETS "${PROJECT_BINARY_DIR}/BBDConfig.h" DESTINATION include) # ${PROJECT_SOURCE_DIR}/build/installer/include)
+# install(TARGETS "${PROJECT_BINARY_DIR}/BBDConfig.h" DESTINATION include) # ${PROJECT_SOURCE_DIR}/build/installer/include)
 
 include(InstallRequiredSystemLibraries)
 set(CPACK_RESOURCE_FILE_LICENSE "${PROJECT_SOURCE_DIR}/LICENSE")

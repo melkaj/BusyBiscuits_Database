@@ -16,13 +16,10 @@ namespace rwdata_std
 	{
 	private:
 		int 		fileNumber;
-		string 		db1FilePath, db2FilePath;
+		string 		db1FileName, db2FileName;
 
 	public:
 		RWData						();
-
-		string		Getdb1FilePath  ();
-		string		Getdb2FilePath  ();
 
 		void 		WriteData		(string socialSecurity, string name, string occupation, bool isOverwrite);
 		void 		ReadInData		(datastructure_std::Datastructure &datastructure);
