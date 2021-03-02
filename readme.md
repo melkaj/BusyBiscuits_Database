@@ -41,7 +41,7 @@ BusyBiscuits_Database
     - On Ubuntu, the command is **sudo apt-get install cmake**
 
 ## What am I looking at? <a name="description"></a>
-- BusyBiscuits Database is another wonderful addition to the BusyBiscuits suite of applications. It is modest database that is built in C++. Its a console application so everything is done through the command line. It is meant to store data entries with three fields - a social security, a name, and an occupation. You can add, remove, update, and read from the database. 
+- **BusyBiscuits Database** is another wonderful addition to the BusyBiscuits suite of applications. It is modest database that is built in C++. Its a console application so everything is done through the command line. It is meant to store data entries with three fields - a social security, a name, and an occupation. You can add, remove, update, and read from the database. 
 - Theres two main parts to the database. The first part is the text file that holds the data for when the application is not running. The second part is data structure that I built from scratch that allows for faster access during run time. 
     - The data structure is a hash table where each 'bucket' points to a root of a binary tree. So when there is collision in the table, it will be placed in the binary tree for a O(log(n)) lookup time. 
 - Since I built this application in Linux, I used CMake to generate Make files that would help build and create executables. I also wrote some shell scripts to automate some of these tasks even more. 
