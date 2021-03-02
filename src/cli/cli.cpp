@@ -90,7 +90,7 @@ void CLI::MainLoop()
                 << "\tadd -    Add a new entry to the database. You will be promted to enter a social security, a name, and an occupation\n"
                 << "\tupdate - Update an existing entry. You will be promted to enter a social security that is already in the database and then you will enter a new name and occupation that will overwrite the existing name and occupation\n"
                 << "\tremove - Remove an existing entry. You will be promted to enter a social security. If it exists, it will be removed\n"
-                << "\tsave -   The modifications that have been performed on the database will be applied to the actual system. Meaning when you exit and enter back in the program, the modifications will be shown."
+                << "\tsave -   The modifications that have been performed on the database will be applied to the actual system. Meaning when you exit and enter back in the program, the modifications will be shown.\n"
                 << "\tprint -  Prints out the current state of the database\n"
                 << "\thelp -   This help summary will pop up again\n" << endl;
         }
