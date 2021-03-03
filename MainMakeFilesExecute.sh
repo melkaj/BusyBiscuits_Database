@@ -3,4 +3,4 @@
 cd build
 make
 
-./main
+./bb-database

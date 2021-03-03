@@ -20,10 +20,10 @@ add_subdirectory(test)
 # Compiling the files in the 'source_files' variable and naming the 
 #   executable 'main'
 # add_executable(main ${source_files})
-add_executable(main src/main.cpp)
-target_link_libraries(main PRIVATE database)
+add_executable(bb-database src/main.cpp)
+target_link_libraries(bb-database PRIVATE database)
 
-install(TARGETS main DESTINATION bin) #${PROJECT_SOURCE_DIR}/build/installer/bin)
+install(TARGETS bb-database DESTINATION bin) #${PROJECT_SOURCE_DIR}/build/installer/bin)
 # install(TARGETS "${PROJECT_BINARY_DIR}/BBDConfig.h" DESTINATION include) # ${PROJECT_SOURCE_DIR}/build/installer/include)
 
 include(InstallRequiredSystemLibraries)
